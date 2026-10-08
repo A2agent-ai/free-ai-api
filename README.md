@@ -30,7 +30,7 @@ These are different access models. In particular, Puter uses its own SDK and LM 
 
 ## About A2Agent
 
-This repository is maintained by the **A2Agent Team**. [A2Agent](https://a2agent.me/pricing) is a paid multi-model gateway and may offer trial or promotional credits to new users. We keep it separate from the independent free-tier table above because a temporary signup offer is not an ongoing free tier. Check the current offer in your account before relying on a quoted amount; our public pricing page describes per-model charges and billing groups.
+This repository is maintained by the **A2Agent Team**. [A2Agent](https://a2agent.me/) is a paid multi-model gateway with no free tier. We keep it separate from the independent free-tier table above. Any top-up bonus is a separate, time-limited offer; check the current pricing page and your account for applicable terms and per-model rates.
 
 ## Keeping the table current
 
