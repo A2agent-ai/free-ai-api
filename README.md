@@ -1,6 +1,6 @@
 # Free AI APIs in 2026: Free Tiers and Trial Quotas
 
-An A2Agent-maintained directory of free AI APIs and related developer APIs. It began as a comparison of nine large-model options and is expanding by category. This directory is a living companion to our 2026 field guide, not a promise of available quota. **Check the provider's linked page and your own console before building around a limit.**
+An A2Agent-maintained directory of free AI APIs and related developer APIs. It began as a comparison of nine large-model options and is expanding by category. The maintainer's paid gateway is also shown for context and clearly labeled. This directory is a living companion to our 2026 field guide, not a promise of available quota. **Check the provider's linked page and your own console before building around a limit.**
 
 Read the field guides: [A2Agent blog article (English)](https://a2agent.me/blog/free-ai-api-guide-2026) · [Illustrated Chinese article](https://a2agent-ai.github.io/free-ai-api/).
 
@@ -8,8 +8,9 @@ Last reviewed: **2026-10-08**. Quotas are tied to particular models, account tie
 
 ## Text generation and model access
 
-| Platform | Free arrangement | Quota or trial highlight | Main catch | Official source |
+| Platform | Access type | Allowance or pricing highlight | Main catch | Official source |
 |---|---|---|---|---|
+| [A2Agent](https://a2agent.me/) (maintainer) | Paid, pay as you go; **no public free tier** | One API key for GLM, Kimi, DeepSeek, Qwen, and MiniMax; billed per token at the listed model rates | Requires a top-up before API use; check the current rate for your model and account group | [Pricing](https://a2agent.me/pricing) · [Models](https://a2agent.me/models) |
 | Google Gemini | Rate-limited free tier | Free input and output tokens on eligible models; live limits vary by model and project | Free-tier content may be used to improve Google's products, subject to regional terms | [Pricing](https://ai.google.dev/gemini-api/docs/pricing) · [Limits](https://ai.google.dev/gemini-api/docs/rate-limits) |
 | Groq | Rate-limited free tier | Example: `openai/gpt-oss-120b` has 30 requests/min, 1,000 requests/day and 200K tokens/day | Limits differ by model; model availability changes | [Rate limits](https://console.groq.com/docs/rate-limits) |
 | SambaNova Cloud | Rate-limited free tier | Example: `Meta-Llama-3.3-70B-Instruct` has 20 requests/min, 20 requests/day and 200K tokens/day | Small daily request budget; check the current model list | [Rate limits](https://docs.sambanova.ai/docs/en/models/rate-limits) |
@@ -49,7 +50,7 @@ These are different access models. In particular, Puter uses its own SDK and LM 
 
 ## About A2Agent
 
-This repository is maintained by the **A2Agent Team**. [A2Agent](https://a2agent.me/) is a paid multi-model gateway with no free tier. We keep it separate from the independent free-tier table above. Any top-up bonus is a separate, time-limited offer; check the current pricing page and your account for applicable terms and per-model rates.
+This repository is maintained by the **A2Agent Team**. [A2Agent](https://a2agent.me/) is a paid multi-model gateway with no public free tier. Its maintainer-labeled row above is included for transparency and comparison, not counted as a free API. Any top-up bonus is a separate offer; check the current pricing page and your account for applicable terms and per-model rates.
 
 ## Keeping the table current
 
