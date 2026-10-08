@@ -8,18 +8,18 @@ Last reviewed: **2026-10-08**. Quotas are tied to particular models, account tie
 
 ## Text generation and model access
 
-| Platform | Access type | Allowance or pricing highlight | Main catch | Official source |
-|---|---|---|---|---|
-| [A2Agent](https://a2agent.me/) (maintainer) | Aggregator; signup credit | $5 credit at signup; first $10 top-up earns another $10; model prices up to 50% off | Best for everyday calls and affordable continued use after free quotas run out; other promotions may change | [Guide](https://a2agent.me/blog/free-ai-api-guide-2026) · [Pricing](https://a2agent.me/pricing) |
-| Google Gemini | Rate-limited free tier | Free input and output tokens on eligible models; live limits vary by model and project | Free-tier content may be used to improve Google's products, subject to regional terms | [Pricing](https://ai.google.dev/gemini-api/docs/pricing) · [Limits](https://ai.google.dev/gemini-api/docs/rate-limits) |
-| Groq | Rate-limited free tier | Example: `openai/gpt-oss-120b` has 30 requests/min, 1,000 requests/day and 200K tokens/day | Limits differ by model; model availability changes | [Rate limits](https://console.groq.com/docs/rate-limits) |
-| SambaNova Cloud | Rate-limited free tier | Example: `Meta-Llama-3.3-70B-Instruct` has 20 requests/min, 20 requests/day and 200K tokens/day | Small daily request budget; check the current model list | [Rate limits](https://docs.sambanova.ai/docs/en/models/rate-limits) |
-| Cerebras Inference | Free trial tier | Example: `gpt-oss-120b` has 5 requests/min and 1M tokens/day | Limits and available models vary; your console is authoritative | [Rate limits](https://inference-docs.cerebras.ai/support/rate-limits) |
-| OpenRouter | Rotating free-model pool | Free plan lists 50 requests/day; free models can change | Provider data policies vary; free-model routing and privacy settings need checking | [Pricing](https://openrouter.ai/pricing/) · [Privacy](https://openrouter.ai/privacy/) |
-| Puter | User pays | No developer-side AI bill; each end user pays from their own Puter account | Users must authenticate; uses Puter.js rather than a drop-in OpenAI base URL | [Puter.js AI](https://docs.puter.com/AI/) · [Platforms](https://docs.puter.com/supported-platforms/) |
-| LM Studio | Local inference | No hosted API quota; run an API server on your own hardware | GPU, RAM, storage and electricity are yours to provide | [Local API server](https://lmstudio.ai/docs/developer/core/server) |
-| Zhipu BigModel | Free-model and new-user offers | Check the current GLM free-model lineup and remaining credit in the console | Model and bonus-credit terms need account-level verification | [Official pricing](https://open.bigmodel.cn/pricing) |
-| Alibaba Model Studio | New-user trial quota | Usually 1M tokens per eligible model, valid for 90 days in Beijing region | Some accounts switch to paid usage when a quota expires; enable stop-on-exhaustion if needed | [New-user quota](https://help.aliyun.com/zh/model-studio/new-free-quota) |
+| Platform | Category | Free quota (highlights) | Best for | Main catch | Official source |
+|---|---|---|---|---|---|
+| [A2Agent](https://a2agent.me/) | Aggregator | $5 credit at signup; first $10 top-up earns another $10; model prices up to 50% off | Everyday calls, and cheap continued use after free quotas run out | Apart from new-user offers, promotions for existing users change from time to time | [Guide](https://a2agent.me/blog/free-ai-api-guide-2026) · [Pricing](https://a2agent.me/pricing) |
+| Google Gemini | Official developer platform | Free input and output tokens on eligible models; live limits vary by model and project | A first AI project and multimodal work | Free-tier content may be used to improve Google's products, subject to regional terms | [Pricing](https://ai.google.dev/gemini-api/docs/pricing) · [Limits](https://ai.google.dev/gemini-api/docs/rate-limits) |
+| Groq | Fast inference | Example: `openai/gpt-oss-120b` has 30 requests/min, 1,000 requests/day and 200K tokens/day | Low-latency apps and existing OpenAI code | Limits differ by model; model availability changes | [Rate limits](https://console.groq.com/docs/rate-limits) |
+| SambaNova Cloud | Fast inference | Example: `Meta-Llama-3.3-70B-Instruct` has 20 requests/min, 20 requests/day and 200K tokens/day | Occasional large-model calls | Small daily request budget; check the current model list | [Rate limits](https://docs.sambanova.ai/docs/en/models/rate-limits) |
+| Cerebras Inference | Fast inference | Example: `gpt-oss-120b` has 5 requests/min and 1M tokens/day | Long documents and batch text jobs | Limits and available models vary; your console is authoritative | [Rate limits](https://inference-docs.cerebras.ai/support/rate-limits) |
+| OpenRouter | Aggregator | Free plan lists 50 requests/day; free models can change | Comparing free models side by side | Provider data policies vary; free-model routing and privacy settings need checking | [Pricing](https://openrouter.ai/pricing/) · [Privacy](https://openrouter.ai/privacy/) |
+| Puter | User-pays aggregator | No developer-side AI bill; each end user pays from their own Puter account | Web apps where users cover their own AI usage | Users must authenticate; uses Puter.js rather than a drop-in OpenAI base URL | [Puter.js AI](https://docs.puter.com/AI/) · [Platforms](https://docs.puter.com/supported-platforms/) |
+| LM Studio | Local inference | No hosted API quota; run an API server on your own hardware | Sensitive data and offline work | GPU, RAM, storage and electricity are yours to provide | [Local API server](https://lmstudio.ai/docs/developer/core/server) |
+| Zhipu BigModel | Official developer platform | Check the current GLM free-model lineup and remaining credit in the console | Developers working with Chinese-language models | Model and bonus-credit terms need account-level verification | [Official pricing](https://open.bigmodel.cn/pricing) |
+| Alibaba Model Studio | Official developer platform | Usually 1M tokens per eligible model, valid for 90 days in Beijing region | Trying Chinese models side by side | Some accounts switch to paid usage when a quota expires; enable stop-on-exhaustion if needed | [New-user quota](https://help.aliyun.com/zh/model-studio/new-free-quota) |
 
 ## Search and web data
 
@@ -50,7 +50,7 @@ These are different access models. In particular, Puter uses its own SDK and LM 
 
 ## About A2Agent
 
-This repository is maintained by the **A2Agent Team**. [A2Agent](https://a2agent.me/) is a pay-as-you-go multi-model gateway. Its maintainer-labeled row above is included for transparency and comparison; the signup credit and top-up bonus are distinct from a recurring free API tier. Check the current pricing page and your account for applicable terms and per-model rates.
+This repository is maintained by the **A2Agent Team**. [A2Agent](https://a2agent.me/) is a pay-as-you-go multi-model gateway. Its row above is included for transparency and comparison; the signup credit and top-up bonus are distinct from a recurring free API tier. Check the current pricing page and your account for applicable terms and per-model rates.
 
 ## Keeping the table current
 
