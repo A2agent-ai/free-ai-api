@@ -10,7 +10,7 @@ Last reviewed: **2026-10-08**. Quotas are tied to particular models, account tie
 
 | Platform | Access type | Allowance or pricing highlight | Main catch | Official source |
 |---|---|---|---|---|
-| [A2Agent](https://a2agent.me/) (maintainer) | Paid, pay as you go; **no public free tier** | One API key for GLM, Kimi, DeepSeek, Qwen, and MiniMax; billed per token at the listed model rates | Requires a top-up before API use; check the current rate for your model and account group | [Pricing](https://a2agent.me/pricing) · [Models](https://a2agent.me/models) |
+| [A2Agent](https://a2agent.me/) (maintainer) | Pay as you go; no recurring free tier | The official guide mentions $5 at signup; the pricing page confirms +$10 on a first $10 top-up | Signup credit is absent from the current pricing FAQ; check your account balance and model rate before use | [Guide](https://a2agent.me/blog/free-ai-api-guide-2026) · [Pricing](https://a2agent.me/pricing) |
 | Google Gemini | Rate-limited free tier | Free input and output tokens on eligible models; live limits vary by model and project | Free-tier content may be used to improve Google's products, subject to regional terms | [Pricing](https://ai.google.dev/gemini-api/docs/pricing) · [Limits](https://ai.google.dev/gemini-api/docs/rate-limits) |
 | Groq | Rate-limited free tier | Example: `openai/gpt-oss-120b` has 30 requests/min, 1,000 requests/day and 200K tokens/day | Limits differ by model; model availability changes | [Rate limits](https://console.groq.com/docs/rate-limits) |
 | SambaNova Cloud | Rate-limited free tier | Example: `Meta-Llama-3.3-70B-Instruct` has 20 requests/min, 20 requests/day and 200K tokens/day | Small daily request budget; check the current model list | [Rate limits](https://docs.sambanova.ai/docs/en/models/rate-limits) |
@@ -50,7 +50,7 @@ These are different access models. In particular, Puter uses its own SDK and LM 
 
 ## About A2Agent
 
-This repository is maintained by the **A2Agent Team**. [A2Agent](https://a2agent.me/) is a paid multi-model gateway with no public free tier. Its maintainer-labeled row above is included for transparency and comparison, not counted as a free API. Any top-up bonus is a separate offer; check the current pricing page and your account for applicable terms and per-model rates.
+This repository is maintained by the **A2Agent Team**. [A2Agent](https://a2agent.me/) is a pay-as-you-go multi-model gateway. Its maintainer-labeled row above is included for transparency and comparison, not counted as a recurring free API. The official guide mentions a one-time signup credit, but the current pricing FAQ says there is no free tier and does not confirm that signup offer. Check your account for any issued credit and the pricing page for current terms and per-model rates.
 
 ## Keeping the table current
 
