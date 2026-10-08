@@ -1,0 +1,1474 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>2026 免费 AI API 全景指南</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;0,9..144,900;1,9..144,600&family=IBM+Plex+Mono:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@600;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#f6f3ea;
+  --card:#fffdf6;
+  --ink:#21261f;
+  --soft:#5d6357;
+  --faint:#969b8c;
+  --line:#ddd6c2;
+  --line-strong:#c9c0a6;
+  --accent:#0e6e63;
+  --accent-deep:#0a524a;
+  --accent-bg:#e3efe9;
+  --warn:#a94e2c;
+  --warn-bg:#f6e7dd;
+  --gold:#8a6d1f;
+  --gold-bg:#f1e8cd;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--paper);
+  color:var(--ink);
+  font-family:"Noto Sans SC",sans-serif;
+  font-size:15.5px;
+  line-height:1.95;
+  -webkit-font-smoothing:antialiased;
+}
+body::before{
+  content:"";position:fixed;inset:0;pointer-events:none;opacity:.04;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+.wrap{max-width:1040px;margin:0 auto;padding:0 26px}
+
+/* top nav */
+.topnav{
+  position:sticky;top:0;z-index:50;
+  background:rgba(246,243,234,.92);
+  backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--line);
+}
+.topnav .wrap{display:flex;align-items:center;gap:18px;height:52px}
+.topnav .brand{
+  font-family:"Noto Serif SC",serif;font-weight:900;font-size:15px;
+  white-space:nowrap;color:var(--accent-deep);
+}
+.topnav nav{display:flex;gap:2px;overflow-x:auto;flex:1}
+.topnav nav a{
+  font-size:12.5px;color:var(--soft);text-decoration:none;
+  padding:5px 11px;border-radius:999px;white-space:nowrap;
+}
+.topnav nav a:hover{color:var(--ink);background:var(--card)}
+.topnav nav a.on{background:var(--accent);color:#fff}
+
+/* hero */
+.hero{padding:72px 0 40px;border-bottom:2px solid var(--ink)}
+.hero .kicker{
+  font-size:12.5px;letter-spacing:.3em;color:var(--accent);
+  font-weight:700;display:flex;align-items:center;gap:14px;margin-bottom:22px;
+}
+.hero .kicker::after{content:"";flex:1;height:1px;background:var(--line-strong)}
+.hero h1{
+  font-family:"Noto Serif SC",serif;font-weight:900;
+  font-size:clamp(32px,5vw,52px);line-height:1.35;letter-spacing:.01em;
+}
+.hero h1 .en{
+  display:block;font-family:Fraunces,serif;font-style:italic;font-weight:600;
+  font-size:.55em;color:var(--soft);margin-top:10px;
+}
+.hero .lede{
+  margin-top:22px;max-width:780px;color:var(--soft);font-size:16px;
+}
+.hero .hero-meta{
+  margin-top:22px;display:flex;flex-wrap:wrap;gap:8px 22px;
+  font-size:12.5px;color:var(--faint);
+}
+.hero .hero-meta b{color:var(--soft);font-weight:500}
+
+/* tldr strip */
+.tldr{
+  margin:34px 0 0;
+  background:var(--ink);color:#e9e6d8;
+  border-radius:12px;padding:22px 26px;
+  position:relative;overflow:hidden;
+}
+.tldr::after{
+  content:"FREE MAP";position:absolute;right:-10px;bottom:-24px;
+  font-family:Fraunces,serif;font-weight:900;font-size:86px;
+  color:rgba(255,255,255,.05);letter-spacing:.04em;pointer-events:none;
+}
+.tldr .t-label{
+  font-size:11.5px;letter-spacing:.28em;color:rgba(255,255,255,.55);
+  font-weight:700;margin-bottom:10px;
+}
+.tldr p{font-size:15px;line-height:2;position:relative;z-index:1}
+.tldr code{
+  font-family:"IBM Plex Mono",monospace;font-size:13px;
+  background:rgba(255,255,255,.12);padding:1px 7px;border-radius:4px;
+}
+
+/* sections */
+.sec{padding:64px 0 8px}
+.sec-head{display:flex;align-items:baseline;gap:16px;margin-bottom:30px}
+.sec-no{
+  font-family:"IBM Plex Mono",monospace;font-size:15px;font-weight:600;
+  color:var(--accent);letter-spacing:.08em;
+}
+.sec-head h2{
+  font-family:"Noto Serif SC",serif;font-weight:900;font-size:27px;letter-spacing:.01em;
+}
+.sec-head .en{
+  font-family:Fraunces,serif;font-style:italic;font-weight:600;
+  font-size:15px;color:var(--faint);margin-left:auto;
+}
+.sec-head + p.sec-intro{color:var(--soft);max-width:800px;margin:-12px 0 28px;font-size:15px}
+
+/* sub-head */
+.sub-head{
+  display:flex;align-items:baseline;gap:12px;
+  margin:38px 0 16px;padding-top:22px;border-top:1px dashed var(--line-strong);
+}
+.sub-head:first-of-type{margin-top:0;padding-top:0;border-top:none}
+.sub-head .dim{
+  font-family:"IBM Plex Mono",monospace;font-size:12px;font-weight:600;
+  color:var(--accent);letter-spacing:.12em;white-space:nowrap;
+}
+.sub-head h3{font-family:"Noto Serif SC",serif;font-weight:900;font-size:19px}
+.sub-head .dim-en{font-family:Fraunces,serif;font-style:italic;font-size:12.5px;color:var(--faint);margin-left:auto}
+
+/* overview table */
+.ov-table{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line-strong);font-size:13.5px}
+.ov-table th{
+  text-align:left;padding:12px 14px;font-weight:700;font-size:12px;
+  letter-spacing:.1em;color:var(--soft);border-bottom:2px solid var(--ink);
+  white-space:nowrap;
+}
+.ov-table td{padding:12px 14px;border-bottom:1px solid var(--line);vertical-align:top;line-height:1.8}
+.ov-table tr:last-child td{border-bottom:none}
+.ov-table tr:hover td{background:#faf7ea}
+.ov-table td.pv{font-weight:700;white-space:nowrap}
+.ov-table a.plink{
+  color:var(--ink);text-decoration:none;
+  border-bottom:1px dashed var(--line-strong);
+  transition:color .15s,border-color .15s;
+}
+.ov-table a.plink::after{
+  content:" →";font-size:10px;color:var(--faint);
+  opacity:0;transition:opacity .15s;
+}
+.ov-table a.plink:hover{color:var(--accent-deep);border-bottom-color:var(--accent)}
+.ov-table a.plink:hover::after{opacity:1}
+.ov-table .role{
+  display:inline-block;font-size:11px;font-weight:700;letter-spacing:.1em;
+  background:var(--accent-bg);color:var(--accent-deep);
+  padding:2px 9px;border-radius:3px;white-space:nowrap;
+}
+.ov-table .role.r-warn{background:var(--warn-bg);color:var(--warn)}
+.ov-table .role.r-gold{background:var(--gold-bg);color:var(--gold)}
+.ov-table code{font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--accent-deep)}
+.ov-table .cn-tag{
+  display:inline-block;font-size:11px;font-weight:700;
+  background:var(--ink);color:#fff;padding:2px 9px;border-radius:3px;white-space:nowrap;
+}
+.tbl-note{margin-top:12px;font-size:12.5px;color:var(--faint)}
+
+/* bands */
+.band{
+  display:grid;grid-template-columns:190px 1fr;gap:24px;
+  padding:18px 0;border-bottom:1px dashed var(--line-strong);
+}
+.band:last-child{border-bottom:none}
+.band .b-role h3{font-family:"Noto Serif SC",serif;font-weight:900;font-size:16px}
+.band .b-role .b-en{font-family:Fraunces,serif;font-style:italic;font-size:12px;color:var(--faint);display:block;margin-top:2px}
+.band .b-players{margin-top:8px;display:flex;flex-wrap:wrap;gap:6px}
+.band .b-players span{
+  font-size:12px;font-weight:700;background:var(--accent-bg);color:var(--accent-deep);
+  padding:3px 10px;border-radius:999px;
+}
+.band .b-players span.gold{background:var(--gold-bg);color:var(--gold)}
+.band .b-players span.warn{background:var(--warn-bg);color:var(--warn)}
+.band .b-desc p{font-size:14px;color:var(--soft);line-height:1.9}
+.band .b-desc b{color:var(--ink)}
+
+/* forms */
+.forms{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px}
+.form{
+  background:var(--card);border:1px solid var(--line-strong);border-top:4px solid var(--accent);
+  padding:20px;border-radius:8px;
+}
+.form.f-warn{border-top-color:var(--warn)}
+.form.f-gold{border-top-color:var(--gold)}
+.form.f-ink{border-top-color:var(--ink)}
+.form h3{font-family:"Noto Serif SC",serif;font-weight:900;font-size:16.5px;margin-bottom:4px}
+.form .f-en{font-family:Fraunces,serif;font-style:italic;font-size:13px;color:var(--faint)}
+.form p{margin-top:10px;font-size:13px;color:var(--soft);line-height:1.85}
+.form .f-ex{margin-top:10px;font-size:12.5px}
+.form .f-ex b{color:var(--ink)}
+.exchange{
+  margin-top:26px;background:var(--warn-bg);border:1px solid #e2c3ae;
+  border-radius:10px;padding:22px 26px;
+}
+.exchange h3{font-family:"Noto Serif SC",serif;font-weight:900;font-size:17px;color:var(--warn);margin-bottom:8px}
+.exchange p{font-size:14.5px;color:#6b4433}
+.exchange ul{list-style:none;margin-top:12px}
+.exchange li{
+  position:relative;padding-left:22px;margin-bottom:8px;font-size:14px;color:#6b4433;
+}
+.exchange li::before{content:"→";position:absolute;left:0;color:var(--warn);font-weight:700}
+
+/* region grid */
+.region{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.region .reg{
+  background:var(--card);border:1px solid var(--line-strong);border-radius:10px;
+  padding:22px;
+}
+.region .reg h3{font-family:"Noto Serif SC",serif;font-weight:900;font-size:16.5px;margin-bottom:12px}
+.region .reg h3 .tag{
+  font-family:"Noto Sans SC",sans-serif;font-size:11px;font-weight:700;letter-spacing:.12em;
+  background:var(--accent-bg);color:var(--accent-deep);
+  padding:2px 10px;border-radius:999px;margin-left:8px;vertical-align:middle;
+}
+.region .reg.dom h3 .tag{background:var(--gold-bg);color:var(--gold)}
+.region .reg.local h3 .tag{background:var(--ink);color:#fff}
+.region .reg ul{list-style:none}
+.region .reg li{
+  position:relative;padding-left:20px;margin-bottom:8px;
+  font-size:13.5px;color:var(--soft);line-height:1.8;
+}
+.region .reg li::before{content:"·";position:absolute;left:4px;color:var(--accent);font-weight:900}
+.region .reg.dom li::before{color:var(--gold)}
+.region .reg.local li::before{color:var(--ink)}
+.region .reg li b{color:var(--ink)}
+.region .reg li .nt{
+  display:inline-block;font-size:11px;font-weight:700;
+  background:var(--warn-bg);color:var(--warn);
+  padding:1px 8px;border-radius:3px;margin-left:6px;vertical-align:middle;
+}
+.region .reg li .ok{
+  display:inline-block;font-size:11px;font-weight:700;
+  background:var(--accent-bg);color:var(--accent-deep);
+  padding:1px 8px;border-radius:3px;margin-left:6px;vertical-align:middle;
+}
+.region .reg li .tbd{
+  display:inline-block;font-size:11px;font-weight:700;
+  background:var(--gold-bg);color:var(--gold);
+  padding:1px 8px;border-radius:3px;margin-left:6px;vertical-align:middle;
+}
+.compat-note{
+  margin-top:18px;background:var(--card);border:1px solid var(--line-strong);
+  border-left:4px solid var(--accent);border-radius:0 8px 8px 0;
+  padding:14px 20px;font-size:13.5px;color:var(--soft);
+}
+.compat-note b{color:var(--ink)}
+.compat-note code{font-family:"IBM Plex Mono",monospace;font-size:12px;background:#f1eee1;padding:0 5px;border-radius:3px}
+
+/* platform cards */
+.pcard{
+  background:var(--card);border:1px solid var(--line-strong);
+  border-radius:14px;padding:30px 32px;margin-bottom:28px;
+  position:relative;overflow:hidden;
+  scroll-margin-top:70px;
+}
+.pcard::before{
+  content:attr(data-num);
+  position:absolute;right:20px;top:-16px;
+  font-family:"IBM Plex Mono",monospace;font-weight:600;font-size:110px;
+  color:rgba(14,110,99,.07);pointer-events:none;line-height:1;
+}
+.pcard.cn::before{color:rgba(138,109,31,.09)}
+.pcard.local::before{color:rgba(169,78,44,.09)}
+.p-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 16px;position:relative;z-index:1}
+.p-head h3{font-family:"Noto Serif SC",serif;font-weight:900;font-size:23px}
+.p-head h3 .en{font-family:Fraunces,serif;font-style:italic;font-weight:600;font-size:15px;color:var(--soft);margin-left:6px}
+.p-role{
+  font-size:11.5px;font-weight:700;letter-spacing:.08em;
+  background:var(--accent-bg);color:var(--accent-deep);padding:3px 11px;border-radius:999px;
+}
+.p-role.warn{background:var(--warn-bg);color:var(--warn)}
+.pcard.cn .p-role{background:var(--gold-bg);color:var(--gold)}
+.pcard.local .p-role{background:var(--warn-bg);color:var(--warn)}
+.p-pos{margin-top:12px;font-size:14.5px;color:var(--ink);position:relative;z-index:1}
+.p-pos b{color:var(--accent-deep)}
+.pcard.cn .p-pos b{color:var(--gold)}
+.pcard.local .p-pos b{color:var(--warn)}
+.p-block{margin-top:20px;position:relative;z-index:1}
+.p-block .b-label{
+  font-size:11.5px;font-weight:700;letter-spacing:.22em;color:var(--faint);margin-bottom:10px;
+}
+.quota-chips{display:flex;flex-wrap:wrap;gap:8px}
+.quota-chips code{
+  font-family:"IBM Plex Mono",monospace;font-size:13px;
+  background:#f1eee1;border:1px solid var(--line);
+  padding:5px 12px;border-radius:6px;color:var(--ink);
+}
+.quota-chips code.hl{background:var(--accent-bg);border-color:#b9d4c8;color:var(--accent-deep);font-weight:600}
+.pcard.cn .quota-chips code.hl{background:var(--gold-bg);border-color:#ddd2a8;color:var(--gold)}
+.pcard.local .quota-chips code.hl{background:var(--warn-bg);border-color:#e2c3ae;color:var(--warn)}
+
+/* pros & cons */
+.proscons{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.pc-box{border-radius:10px;padding:18px 20px}
+.pc-box.pros{background:var(--accent-bg);border:1px solid #bcd6ca}
+.pc-box.cons{background:var(--warn-bg);border:1px solid #e2c3ae}
+.pc-box h4{
+  font-size:12.5px;font-weight:700;letter-spacing:.24em;
+  margin-bottom:10px;
+}
+.pc-box.pros h4{color:var(--accent-deep)}
+.pc-box.cons h4{color:var(--warn)}
+.pc-box ul{list-style:none}
+.pc-box li{
+  position:relative;padding-left:22px;margin-bottom:7px;
+  font-size:13.5px;line-height:1.8;color:var(--ink);
+}
+.pc-box.pros li::before{content:"+";position:absolute;left:0;top:0;color:var(--accent-deep);font-weight:700;font-family:"IBM Plex Mono",monospace}
+.pc-box.cons li::before{content:"−";position:absolute;left:0;top:0;color:var(--warn);font-weight:700;font-family:"IBM Plex Mono",monospace}
+
+/* how to use */
+.steps{list-style:none;counter-reset:st}
+.steps li{
+  counter-increment:st;position:relative;padding-left:34px;margin-bottom:9px;
+  font-size:14px;line-height:1.85;color:var(--ink);
+}
+.steps li::before{
+  content:counter(st);
+  position:absolute;left:0;top:2px;
+  width:22px;height:22px;border-radius:50%;
+  background:var(--ink);color:var(--card);
+  font-family:"IBM Plex Mono",monospace;font-size:11.5px;font-weight:600;
+  display:flex;align-items:center;justify-content:center;
+}
+.steps li code{font-family:"IBM Plex Mono",monospace;font-size:12.5px;background:#f1eee1;padding:0 6px;border-radius:3px}
+.how-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.how-chips code{
+  font-family:"IBM Plex Mono",monospace;font-size:12.5px;
+  background:var(--ink);color:#e9e6d8;
+  padding:5px 12px;border-radius:6px;
+}
+.how-chips code em{font-style:normal;color:rgba(255,255,255,.55);font-size:11px;margin-right:6px}
+
+/* who & why */
+.who-list{list-style:none}
+.who-list li{
+  position:relative;padding-left:24px;margin-bottom:9px;
+  font-size:14px;line-height:1.85;
+}
+.who-list li::before{content:"▸";position:absolute;left:2px;top:0;color:var(--accent);font-family:"IBM Plex Mono",monospace}
+.pcard.cn .who-list li::before{color:var(--gold)}
+.pcard.local .who-list li::before{color:var(--warn)}
+.who-list li b{font-weight:700}
+.who-list li .why{color:var(--soft);font-size:13.5px}
+
+.cn-note{
+  margin-top:18px;background:#f3f0e3;border-left:3px solid var(--ink);
+  padding:12px 18px;font-size:13.5px;color:var(--soft);border-radius:0 8px 8px 0;
+}
+.cn-note b{color:var(--ink)}
+.cn-note code{font-family:"IBM Plex Mono",monospace;font-size:12px;background:#e7e3d0;padding:0 6px;border-radius:3px}
+
+/* decision table */
+.dec-table{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line-strong);font-size:14px}
+.dec-table th{
+  text-align:left;padding:13px 16px;font-weight:700;font-size:12.5px;
+  letter-spacing:.1em;color:var(--soft);border-bottom:2px solid var(--ink);white-space:nowrap;
+}
+.dec-table td{padding:14px 16px;border-bottom:1px solid var(--line);vertical-align:top;line-height:1.85}
+.dec-table tr:last-child td{border-bottom:none}
+.dec-table tr:hover td{background:#faf7ea}
+.dec-table td.you{font-weight:700;white-space:nowrap}
+.dec-table .pick{font-weight:700;color:var(--accent-deep)}
+.dec-table .sub{color:var(--gold)}
+.dec-table td.why{color:var(--soft);font-size:13px}
+
+/* tips */
+.tips{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.tip{
+  background:var(--card);border:1px solid var(--line-strong);border-radius:12px;
+  padding:22px;position:relative;
+}
+.tip .t-no{
+  font-family:"IBM Plex Mono",monospace;font-size:12px;font-weight:600;
+  color:var(--accent);letter-spacing:.1em;
+}
+.tip h3{font-family:"Noto Serif SC",serif;font-weight:900;font-size:16.5px;margin:8px 0 8px}
+.tip p{font-size:13.5px;color:var(--soft);line-height:1.85}
+.tip code{font-family:"IBM Plex Mono",monospace;font-size:12px;background:#f1eee1;padding:0 5px;border-radius:3px}
+
+/* ending */
+.ending{
+  margin:56px 0 80px;
+  background:var(--accent-deep);color:#e9f0ea;
+  border-radius:16px;padding:40px 44px;position:relative;overflow:hidden;
+}
+.ending::after{
+  content:"ONE LINE TO SWITCH";position:absolute;right:-6px;bottom:-14px;
+  font-family:Fraunces,serif;font-weight:900;font-size:56px;letter-spacing:.05em;
+  color:rgba(255,255,255,.06);pointer-events:none;
+}
+.ending h2{font-family:"Noto Serif SC",serif;font-weight:900;font-size:24px;margin-bottom:14px}
+.ending p{font-size:14.5px;line-height:2.1;color:rgba(255,255,255,.85);max-width:760px;position:relative;z-index:1}
+.ending code{
+  font-family:"IBM Plex Mono",monospace;font-size:12.5px;
+  background:rgba(255,255,255,.14);padding:1px 7px;border-radius:4px;
+}
+
+footer{
+  border-top:1px solid var(--line-strong);
+  padding:30px 0 70px;
+  font-size:12px;color:var(--faint);line-height:2;
+}
+footer a{color:var(--accent);text-decoration:none;border-bottom:1px solid #b9d4c8}
+footer b{color:var(--soft);font-weight:500}
+
+/* references */
+.refs{
+  border-top:1px solid var(--line-strong);
+  padding:28px 0 70px;
+  font-family:"Noto Sans SC",sans-serif;
+}
+.refs h3{
+  font-family:"Noto Serif SC",serif;
+  font-weight:900;font-size:18px;
+  letter-spacing:.02em;
+  margin-bottom:16px;
+}
+.refs h3 .en{
+  font-family:Fraunces,serif;font-style:italic;font-weight:600;
+  font-size:13px;color:var(--faint);margin-left:8px;
+}
+.refs ol{list-style:none;counter-reset:ref}
+.refs li{
+  counter-increment:ref;
+  position:relative;
+  padding-left:38px;
+  margin-bottom:9px;
+  font-size:12.5px;line-height:1.9;
+  color:var(--soft);
+}
+.refs li::before{
+  content:"[" counter(ref) "]";
+  position:absolute;left:0;top:0;
+  font-family:"IBM Plex Mono",monospace;
+  font-size:11.5px;color:var(--accent);
+  font-weight:600;
+}
+.refs a{color:var(--accent);text-decoration:none;border-bottom:1px solid #b9d4c8}
+.refs a:hover{border-color:var(--accent)}
+.refs .src{color:var(--faint)}
+.refs .for{color:var(--faint);font-size:11.5px}
+.refs .ofs{margin-top:26px}
+.refs .ofs h4{
+  font-size:12px;font-weight:700;letter-spacing:.2em;
+  color:var(--faint);margin-bottom:12px;
+}
+.refs .ofs ul{list-style:none;display:grid;grid-template-columns:repeat(2,1fr);gap:7px 32px}
+.refs .ofs li{font-size:12.5px;line-height:1.9;color:var(--soft)}
+.refs .ofs li b{color:var(--ink);font-weight:700}
+.refs .ofs code{font-family:"IBM Plex Mono",monospace;font-size:11.5px;color:var(--faint);margin-left:6px}
+
+/* entrance */
+.hero .kicker,.hero h1,.hero .lede,.hero .hero-meta,.tldr{
+  opacity:0;animation:rise .7s cubic-bezier(.2,.7,.3,1) forwards;
+}
+.hero h1{animation-delay:.08s}
+.hero .lede{animation-delay:.16s}
+.hero .hero-meta{animation-delay:.24s}
+.tldr{animation-delay:.32s}
+@keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+
+@media (max-width:860px){
+  .forms{grid-template-columns:repeat(2,1fr)}
+  .tips{grid-template-columns:1fr}
+  .band{grid-template-columns:1fr;gap:10px}
+  .region{grid-template-columns:1fr}
+  .proscons{grid-template-columns:1fr}
+  .pcard{padding:24px 20px}
+  .pcard::before{font-size:80px;right:10px;top:-10px}
+  .sec-head .en,.sub-head .dim-en{display:none}
+  .ov-table,.dec-table{display:block;overflow-x:auto}
+}
+</style>
+</head>
+<body>
+
+<div class="topnav">
+  <div class="wrap">
+    <span class="brand">免费 AI API 全景指南</span>
+    <nav id="topnav">
+      <a href="#s1">01 概况与分类</a>
+      <a href="#s2">02 逐家详解</a>
+      <a href="#s3">03 人群速查</a>
+      <a href="#s4">04 生存手册</a>
+    </nav>
+  </div>
+</div>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="kicker">AI API FIELD GUIDE · 2026</div>
+    <h1>2026 免费 AI API 全景指南
+      <span class="en">A Field Guide to Free AI APIs — Quotas, Costs &amp; Who Each One Fits</span>
+    </h1>
+    <p class="lede">想用大模型，又不想先掏钱？这么想的人不止你一个。翻一遍各家平台的页面，处处都写着「免费」，可真注册起来才知道各有门道：有的要绑卡，有的额度半天就用完，有的条款说变就变。这篇指南帮你把这件事一次弄明白——先给当前市场上的免费 AI API 做一套完整分类，再逐家拆开看：它是什么、属于哪一类、优缺点、怎么上手、以及适合什么样的人。覆盖六家国际平台、一家本地部署工具和两家中国平台，数据核对于 2026 年 9 月，以各家控制台实时显示为准。</p>
+    <div class="hero-meta">
+      <span>核稿日期：<b>2026-09-30</b></span>
+      <span>覆盖平台：<b>6 家国际 + 2 家中国 + 1 家本地</b></span>
+      <span>阅读时长：<b>约 16 分钟</b></span>
+    </div>
+    <div class="tldr">
+      <div class="t-label">先说清楚 · 「免费」的定义与五种形态</div>
+      <p>这篇文章说的「免费」，指不付钱就能调用模型 API，但它有五种形态，能做的事完全不同。<code>限速型</code>永久免费，按每分钟多少次、每天多少次设限，不超速就能一直用；<code>储值型</code>送一笔试用金，用完即止；<code>池化型</code>额度永久，但免费的是轮换的模型池；<code>用户分摊型</code>对开发者免费，费用记在最终用户的账号上；<code>本地部署</code>没有限额概念，代价是自己的硬件。后文每家的标签都会标出它属于哪一种；此外免费背后还有另一重代价——训练数据、账号注册或硬件。先分清形态，再谈额度。</p>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- 01 概况与分类 -->
+  <section class="sec" id="s1">
+    <div class="sec-head"><span class="sec-no">01</span><h2>全文概况与详细分类</h2><span class="en">Overview &amp; Classification</span></div>
+    <p class="sec-intro">先看一张总表掌握全貌，再用四个维度把当前市场的免费 AI API 分门别类：按接入方式、按免费形态、按地域与网络接入、按接口兼容性。</p>
+
+    <div class="sub-head">
+      <span class="dim">DIM 0</span>
+      <h3>一表总览</h3>
+      <span class="dim-en">The Map at a Glance</span>
+    </div>
+    <table class="ov-table">
+      <tr><th>平台</th><th>接入方式</th><th>免费额度（要点）</th><th>适合人群</th><th>核心代价</th></tr>
+      <tr>
+        <td class="pv"><a class="plink" href="https://a2agent.me/pricing" target="_blank" rel="noopener">A2Agent</a></td>
+        <td><span class="role">聚合平台</span></td>
+        <td>可能有新用户试用额度；具体活动与模型价格以注册页面和定价页为准</td>
+        <td>开发者日常调用、免费额度用尽后的低价续用</td>
+        <td>除新用户优惠外，老用户的其他抽奖优惠不定时调整更新</td>
+      </tr>
+      <tr>
+        <td class="pv"><a class="plink" href="#gemini">Google Gemini</a><span class="cn-tag" style="margin-left:6px">需特殊网络</span></td>
+        <td><span class="role">官方开发者平台</span></td>
+        <td>无需信用卡；官方已不公布静态限额，以控制台为准，Flash 系列具体请求限额随模型和项目变化</td>
+        <td>第一个 AI 项目、多模态需求</td>
+        <td>免费层数据用于训练（EEA / 瑞士 / 英国除外）</td>
+      </tr>
+      <tr>
+        <td class="pv"><a class="plink" href="#groq">Groq</a></td>
+        <td><span class="role">推理加速平台</span></td>
+        <td><code>30 次/分钟 · 1,000 次/天 · 20 万 token/天</code>，无卡</td>
+        <td>低延迟交互、现成 OpenAI 代码</td>
+        <td>模型少、轮换快，老教程代码会失效</td>
+      </tr>
+      <tr>
+        <td class="pv"><a class="plink" href="#sambanova">SambaNova</a></td>
+        <td><span class="role">推理加速平台</span></td>
+        <td>Llama 3.3 70B：<code>20 次/分钟 · 20 次/天 · 20 万 token/天</code>（按模型计算），无卡</td>
+        <td>免费体验 Llama 3.3 70B 等开源模型</td>
+        <td>日请求数只有 20 次</td>
+      </tr>
+      <tr>
+        <td class="pv"><a class="plink" href="#cerebras">Cerebras</a></td>
+        <td><span class="role">推理加速平台</span></td>
+        <td>约 <code>100 万 token/天</code>，无卡；请求限速口径不一，以控制台为准</td>
+        <td>长文档、批量文本处理</td>
+        <td>免费模型阵容经常变动</td>
+      </tr>
+      <tr>
+        <td class="pv"><a class="plink" href="#openrouter">OpenRouter</a></td>
+        <td><span class="role">聚合平台</span></td>
+        <td>免费模型约 <code>50 次/天</code>；每分钟及充值后限额以官方定价页和账号面板为准</td>
+        <td>横向对比模型、选型评测</td>
+        <td>免费模型池轮换；上游模型的数据政策需逐一核对</td>
+      </tr>
+      <tr>
+        <td class="pv"><a class="plink" href="#puter">Puter</a></td>
+        <td><span class="role">聚合平台</span></td>
+        <td>对开发者免费；AI 费用由最终用户账号承担，新账号送起始额度</td>
+        <td>网页应用、前端开发者</td>
+        <td>终端用户需登录并承担用量；也支持 Node.js</td>
+      </tr>
+      <tr>
+        <td class="pv"><a class="plink" href="#lmstudio">LM Studio</a><span class="cn-tag" style="margin-left:6px">本地</span></td>
+        <td><span class="role r-warn">本地部署</span></td>
+        <td>无任何限额，实际能力取决于本地硬件</td>
+        <td>数据敏感、离线、内网环境</td>
+        <td>需要自己的显卡 / 内存</td>
+      </tr>
+      <tr>
+        <td class="pv"><a class="plink" href="#zhipu">智谱 BigModel</a></td>
+        <td><span class="role r-gold">官方平台（中国）</span></td>
+        <td>当前免费模型与新用户赠额以官方定价页为准</td>
+        <td>中国学习者、Agent 跑量</td>
+        <td>赠送额度条款以官方为准</td>
+      </tr>
+      <tr>
+        <td class="pv"><a class="plink" href="#bailian">阿里百炼</a></td>
+        <td><span class="role r-gold">官方平台（中国）</span></td>
+        <td>合资格模型通常各有 <code>100 万 token</code> 新人额度，90 天有效</td>
+        <td>中国模型横向试用</td>
+        <td>90 天过期，仅北京地域</td>
+      </tr>
+    </table>
+    <p class="tbl-note">注：九家独立选项之外，表中另列 A2Agent 作为付费网关及可能的试用活动；本文由 A2Agent Team 维护。额度来自官方文档和 2026 年 9 月的核实资料，部分内容于 10 月 8 日更新；实际数字以控制台为准。点击平台名称可跳转到详细介绍。</p>
+
+    <div class="sub-head">
+      <span class="dim">DIM 1</span>
+      <h3>分类维度一：按接入方式</h3>
+      <span class="dim-en">By Access Method</span>
+    </div>
+    <p class="sec-intro" style="margin-top:0">按「从哪里接入、模型在哪里运行」分四类：官方开发者平台、推理加速平台、聚合平台、本地部署。</p>
+    <div class="band">
+      <div class="b-role">
+        <h3>官方开发者平台<span class="b-en">Official Developer Platforms</span></h3>
+        <div class="b-players"><span>Google Gemini</span><span class="gold">智谱</span><span class="gold">阿里百炼</span></div>
+      </div>
+      <div class="b-desc">
+        <p>模型厂商自己的开发者网站，注册后直接调用自家模型。免费层面向个人开发者，用于试用和开发；额度相对慷慨（如 Gemini 的多模态、智谱的免费模型）；数据使用条款则因平台和服务等级而异。</p>
+      </div>
+    </div>
+    <div class="band">
+      <div class="b-role">
+        <h3>推理加速平台<span class="b-en">Fast Inference Platforms</span></h3>
+        <div class="b-players"><span>Groq</span><span>SambaNova</span><span>Cerebras</span></div>
+      </div>
+      <div class="b-desc">
+        <p>用自研推理芯片提供 API 的平台，共同特点是响应速度快（每秒几百到几千 token）。免费层提供开源模型，适合对延迟敏感的开发和调试。三家的额度结构不同：Groq 按请求数算，SambaNova 请求少但单次可用 token 多，Cerebras 按 token 总量算。</p>
+      </div>
+    </div>
+    <div class="band">
+      <div class="b-role">
+        <h3>聚合平台<span class="b-en">Aggregator Platforms</span></h3>
+        <div class="b-players"><span>OpenRouter</span><span>Puter</span></div>
+      </div>
+      <div class="b-desc">
+        <p>第三方平台，一个入口调用多家厂商的模型。OpenRouter 一个 key 调用 500+ 个模型，免费额度覆盖 20+ 个免费模型；Puter 面向浏览器应用，开发者免费接入，AI 费用记在最终用户的账号上。</p>
+      </div>
+    </div>
+    <div class="band">
+      <div class="b-role">
+        <h3>本地部署<span class="b-en">Local Deployment</span></h3>
+        <div class="b-players"><span class="warn">LM Studio</span></div>
+      </div>
+      <div class="b-desc">
+        <p>模型和算力都在你自己的电脑上，不经过任何服务器。没有账号、没有限额、数据不出本机，代价是硬件配置——能跑多强的模型，取决于你的显卡和内存。</p>
+      </div>
+    </div>
+
+    <div class="sub-head">
+      <span class="dim">DIM 2</span>
+      <h3>分类维度二：按免费形态</h3>
+      <span class="dim-en">By Form of Free</span>
+    </div>
+    <p class="sec-intro" style="margin-top:0">把市场上所有「免费」摊开看，共有五种形态。分清它们，你才知道哪家能长期用、哪家只是一次性额度。</p>
+    <div class="forms">
+      <div class="form">
+        <h3>限速型</h3><span class="f-en">Rate-Limited · 能久用</span>
+        <p>按请求频率或 token 设限，通常没有固定试用到期日；平台可调整免费模型与限额。</p>
+        <p class="f-ex"><b>代表：</b>Gemini、Groq、SambaNova、Cerebras、OpenRouter 免费池、智谱</p>
+      </div>
+      <div class="form f-warn">
+        <h3>储值型</h3><span class="f-en">Trial Credit · 一次性</span>
+        <p>送一笔一次性额度，按 token 扣费，用完即停。适合短期集中试用，不适合长期挂服务。</p>
+        <p class="f-ex"><b>代表：</b>阿里百炼 90 天额度</p>
+      </div>
+      <div class="form f-gold">
+        <h3>池化型</h3><span class="f-en">Rotating Pool · 模型不定</span>
+        <p>额度永久，但免费的是「一池轮换的模型」，具体是哪几个模型随时会变。你能长期免费，但别把项目绑死在某个具体模型上。</p>
+        <p class="f-ex"><b>代表：</b>OpenRouter 的 <code>:free</code> 模型池</p>
+      </div>
+      <div class="form f-gold">
+        <h3>用户分摊型</h3><span class="f-en">User-Pays · 开发者零成本</span>
+        <p>对开发者免费，没有开发者侧的账单；AI 费用记在最终用户的账号上，新账号通常送起始额度。适合做面向终端用户的网页应用。</p>
+        <p class="f-ex"><b>代表：</b>Puter</p>
+      </div>
+      <div class="form f-ink">
+        <h3>本地部署</h3><span class="f-en">Local · 没有限额</span>
+        <p>不算 API：模型跑在自己电脑上，不限次数、不限 token、离线可用。没有「额度」这个概念，代价是硬件。</p>
+        <p class="f-ex"><b>代表：</b>LM Studio</p>
+      </div>
+    </div>
+    <div class="exchange">
+      <h3>免费之外的代价</h3>
+      <p>读免费条款时，真正要读的是代价。你付出的不是钱，而是：</p>
+      <ul>
+        <li><b>训练数据。</b>Gemini 免费层和部分 OpenRouter 上游模型可能将输入输出用于产品改进或训练；两家的具体条款及隐私设置不同，敏感数据不要直接传入。</li>
+        <li><b>身份信息。</b>智谱需要手机号注册；Puter 需要你的用户登录账号。</li>
+        <li><b>硬件成本。</b>本地部署（LM Studio）不花 API 钱，但需要自己的显卡和内存。</li>
+        <li><b>限速和后续付费。</b>免费额度在设计上满足学习开发、不够支撑生产流量，项目做大了需要付费。</li>
+      </ul>
+    </div>
+
+    <div class="sub-head">
+      <span class="dim">DIM 3</span>
+      <h3>分类维度三：按地域与网络接入</h3>
+      <span class="dim-en">By Region &amp; Accessibility</span>
+    </div>
+    <p class="sec-intro" style="margin-top:0">对中文读者来说，这个维度比前两个更实际：能不能直连，直接决定一家平台对你值不值。</p>
+    <div class="region">
+      <div class="reg">
+        <h3>国际平台<span class="tag">6 家</span></h3>
+        <ul>
+          <li><b>Groq</b><span class="ok">一般可直连</span>——国际平台里对大陆网络最友好</li>
+          <li><b>OpenRouter</b><span class="ok">一般可直连</span>——免费模型池同样可用</li>
+          <li><b>SambaNova</b><span class="tbd">需实测</span>——大陆直连情况以实测为准</li>
+          <li><b>Cerebras</b><span class="tbd">需实测</span>——大陆直连情况以实测为准</li>
+          <li><b>Puter</b><span class="tbd">需实测</span>——网页应用，大陆访问情况以实测为准</li>
+          <li><b>Google Gemini</b><span class="nt">无法直连</span>——需要特殊网络环境，大陆读者门槛最高</li>
+        </ul>
+      </div>
+      <div class="reg dom">
+        <h3>中国平台<span class="tag">2 家</span></h3>
+        <ul>
+          <li><b>智谱 BigModel</b><span class="ok">中国境内直连</span>——手机号注册即用，零网络成本</li>
+          <li><b>阿里百炼</b><span class="ok">中国境内直连</span>——需阿里云账号 + 实名认证</li>
+        </ul>
+      </div>
+      <div class="reg local">
+        <h3>本地部署<span class="tag">1 家</span></h3>
+        <ul>
+          <li><b>LM Studio</b><span class="ok">离线运行</span>——不需要网络；下载模型时可走 Hugging Face 镜像站加速</li>
+        </ul>
+      </div>
+    </div>
+    <p class="tbl-note">注：以上可达性为 2026 年 9 月社区普遍反馈，网络环境因人而异，以实测为准。</p>
+
+    <div class="sub-head">
+      <span class="dim">DIM 4</span>
+      <h3>分类维度四：按接口兼容性</h3>
+      <span class="dim-en">By API Compatibility</span>
+    </div>
+    <div class="compat-note">
+      <p><b>多数云端平台提供 OpenAI 兼容接口</b>，可复用部分 <code>openai</code> 库代码，但端点与功能仍需逐项验证。Puter 主要通过 Puter.js 调用，不能只改 <code>base_url</code> 接入；LM Studio 可以在本机启动 OpenAI 与 Anthropic 兼容的 API 服务。</p>
+    </div>
+  </section>
+
+  <!-- 02 逐家详解 -->
+  <section class="sec" id="s2">
+    <div class="sec-head"><span class="sec-no">02</span><h2>逐家详解：是什么、优缺点、怎么用、适合谁</h2><span class="en">The Platforms, One by One</span></div>
+    <p class="sec-intro">六家国际平台、一家本地部署工具、两家中国平台。每张卡片按同一套模板拆解：它是什么 → 属于哪一类 → 免费额度 → 优缺点 → 如何使用 → 推荐人群与理由。</p>
+
+    <article class="pcard" id="gemini" data-num="01">
+      <div class="p-head">
+        <h3>Google Gemini<span class="en">Google AI Studio</span></h3>
+        <span class="p-role">官方开发者平台 · 限速型</span>
+      </div>
+      <p class="p-pos"><b>是什么：</b>Google 自家多模态大模型 Gemini 的官方 API 入口，通过 AI Studio 提供。免费层注册即用、无需信用卡，是免费 AI API 里<b>能力最均衡的日常主力</b>——文本、图片、代码一次搞定。</p>
+      <div class="p-block">
+        <div class="b-label">免费额度</div>
+        <div class="quota-chips">
+          <code class="hl">无需信用卡，注册即用</code>
+          <code>Flash 系列限额以 AI Studio 面板为准</code>
+          <code>部分账号单模型 TPM 达百万级</code>
+          <code>限额以控制台实时显示为准</code>
+        </div>
+      </div>
+      <div class="p-block">
+        <div class="b-label">优缺点</div>
+        <div class="proscons">
+          <div class="pc-box pros">
+            <h4>优点</h4>
+            <ul>
+              <li>免费层能力最均衡：文本、图像、代码全覆盖，多模态是免费池最强</li>
+              <li>门槛最低：无需绑卡、无需手机验证，注册即用</li>
+              <li>额度相对宽裕，部分账号 TPM 达百万级，Flash 系列适合跑量</li>
+              <li>SDK 生态成熟，升级付费路径顺滑</li>
+            </ul>
+          </div>
+          <div class="pc-box cons">
+            <h4>缺点</h4>
+            <ul>
+              <li>大陆无法直连，是九家里网络门槛最高的一家</li>
+              <li>限额不透明：官方自 2026-09 起不再公布静态限额表，媒体数字互相打架</li>
+              <li>免费层数据可能被用于训练（EEA / 瑞士 / 英国除外），敏感数据不能传</li>
+              <li>Pro 系列已基本退出免费层；开启付费会替换该项目的免费层</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="p-block">
+        <div class="b-label">如何使用</div>
+        <ol class="steps">
+          <li>打开 <code>ai.google.dev</code>，用 Google 账号登录 AI Studio</li>
+          <li>在「Get API key」里生成 key——无需绑卡，全程一分钟</li>
+          <li>用 OpenAI 兼容地址 <code>https://generativelanguage.googleapis.com/v1beta/openai/</code> 接入，或直接用 Google 原生 SDK</li>
+          <li>调用前先到 AI Studio 的限速面板确认你账号的实时限额</li>
+        </ol>
+        <div class="how-chips">
+          <code><em>注册入口</em>ai.google.dev</code>
+          <code><em>接口地址</em>generativelanguage.googleapis.com/v1beta/openai/</code>
+          <code><em>示例模型</em>gemini-2.5-flash</code>
+        </div>
+      </div>
+      <div class="p-block">
+        <div class="b-label">推荐人群与理由</div>
+        <ul class="who-list">
+          <li><b>在校学生 / 转行者的第一个 AI 项目</b><span class="why">——无卡无验证，注册即用；一个平台就能覆盖文本、图片、代码三类需求，学习期不用换工具</span></li>
+          <li><b>需要图文混合处理的独立开发者</b><span class="why">——Gemini 的视觉理解在免费池里没有对手，识图、摘要、生成都能做</span></li>
+          <li><b>有稳定国际网络环境的内容 / 自动化工具开发者</b><span class="why">——额度宽裕到可以挂长期小工具，而其他家的限速型额度大多撑不住</span></li>
+        </ul>
+      </div>
+      <div class="cn-note"><b>中文用户提示：</b>没有稳定网络环境的话，不要把它当首选——直接用后面的智谱 GLM-4-Flash 起步更实际。有环境的话，它是九家里免费层能力最强的一家。</div>
+    </article>
+
+    <article class="pcard" id="groq" data-num="02">
+      <div class="p-head">
+        <h3>Groq<span class="en">LPU Inference</span></h3>
+        <span class="p-role">推理加速平台 · 限速型</span>
+      </div>
+      <p class="p-pos"><b>是什么：</b>一家用自研 LPU 芯片做推理加速的公司，API 上跑的是<b>开源权重模型</b>（OpenAI 的 gpt-oss 系列、Qwen 变体等），免费层以速度快著称——每秒几百 token，做聊天、语音交互这类对延迟敏感的应用，体验最接近付费。</p>
+      <div class="p-block">
+        <div class="b-label">免费额度（组织级，无卡）</div>
+        <div class="quota-chips">
+          <code class="hl">30 次/分钟</code>
+          <code class="hl">1,000 次/天</code>
+          <code>8,000 token/分钟</code>
+          <code class="hl">200,000 token/天</code>
+          <code>模型：gpt-oss-120b / gpt-oss-20b / qwen3.6-27b</code>
+        </div>
+      </div>
+      <div class="p-block">
+        <div class="b-label">优缺点</div>
+        <div class="proscons">
+          <div class="pc-box pros">
+            <h4>优点</h4>
+            <ul>
+              <li>免费层里最快：LPU 推理，每秒几百 token，交互体验接近付费产品</li>
+              <li>OpenAI 完全兼容：现有 openai 库代码只改 base_url 和 key 就能跑</li>
+              <li>20 万 token/天在限速型免费层里算慷慨，够撑一个开发期项目</li>
+              <li>无需信用卡，邮箱注册即用</li>
+            </ul>
+          </div>
+          <div class="pc-box cons">
+            <h4>缺点</h4>
+            <ul>
+              <li>模型少且轮换快：Llama 系列 2026-08 已下线，老教程代码会直接报错</li>
+              <li>只跑开源权重模型，没有 Gemini 级别的闭源旗舰</li>
+              <li>token 也有日上限（20 万/天），长提示 + 大上下文烧得比想象快</li>
+              <li>免费层高峰期可能排队，稳定性不如付费</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="p-block">
+        <div class="b-label">如何使用</div>
+        <ol class="steps">
+          <li>打开 <code>console.groq.com</code>，邮箱注册（无需绑卡）</li>
+          <li>在「API Keys」页生成 key；顺路看一眼「Limits」页——你账号的实时限额在那里</li>
+          <li>把现有 OpenAI 代码的 <code>base_url</code> 改成 <code>https://api.groq.com/openai/v1</code>，模型名换成 <code>openai/gpt-oss-120b</code></li>
+          <li>注意：网上流传的「14,400 次/天」已过时，按 1,000 次/天规划用量</li>
+        </ol>
+        <div class="how-chips">
+          <code><em>注册入口</em>console.groq.com</code>
+          <code><em>接口地址</em>api.groq.com/openai/v1</code>
+          <code><em>示例模型</em>openai/gpt-oss-120b</code>
+        </div>
+      </div>
+      <div class="p-block">
+        <div class="b-label">推荐人群与理由</div>
+        <ul class="who-list">
+          <li><b>独立开发者做 MVP</b><span class="why">——1,000 次/天够开发期用，速度又快，调试体验和付费没区别</span></li>
+          <li><b>做实时聊天 / 语音交互的人</b><span class="why">——低延迟是交互类应用的命门，Groq 免费层的响应速度在同类里最快</span></li>
+          <li><b>已有 OpenAI 格式代码、想零成本跑起来的人</b><span class="why">——迁移成本最低的一家，改两行配置就能免费使用</span></li>
+        </ul>
+      </div>
+      <div class="cn-note"><b>中文用户提示：</b>中国境内一般可直连（以实测为准），是国际平台里对大陆网络最友好的一家，也是「零成本迁移」最划算的入口。</div>
+    </article>
+
+    <article class="pcard" id="sambanova" data-num="03">
+      <div class="p-head">
+        <h3>SambaNova<span class="en">SambaNova Cloud</span></h3>
+        <span class="p-role">推理加速平台 · 限速型</span>
+      </div>
+      <p class="p-pos"><b>是什么：</b>用自研 RDU 芯片做推理的平台（SambaNova Cloud），速度接近 Groq 一档，但免费层的模型档次更高：<b>官方当前免费名单包括 Llama 3.3 70B、DeepSeek-V3.1 和 gpt-oss-120b</b>。具体模型以官方限额页为准。</p>
+      <div class="p-block">
+        <div class="b-label">免费额度（无卡，按模型分别计算）</div>
+        <div class="quota-chips">
+          <code class="hl">Llama 3.3 70B：20 次/分钟 · 20 次/天 · 20 万 token/天</code>
+          <code>DeepSeek-V3.1、gpt-oss-120b：限额以官方模型表为准</code>
+          <code>DeepSeek-V3.1、gpt-oss-120b 同样免费</code>
+          <code>其他新用户活动以控制台为准</code>
+        </div>
+      </div>
+      <div class="p-block">
+        <div class="b-label">优缺点</div>
+        <div class="proscons">
+          <div class="pc-box pros">
+            <h4>优点</h4>
+            <ul>
+              <li>免费层提供多种开源模型，适合做兼容性和速度测试</li>
+              <li>RDU 芯片推理，速度快</li>
+              <li>20 万 token/天按模型分别计算——平均每次请求可用约 1 万 token，适合长任务</li>
+              <li>无需信用卡，OpenAI 兼容，响应头里直接返回限速状态</li>
+            </ul>
+          </div>
+          <div class="pc-box cons">
+            <h4>缺点</h4>
+            <ul>
+              <li>日请求数只有 20 次：适合「少量大任务」，不适合频繁对话</li>
+              <li>免费模型名单可能变化，选型前要重新核对</li>
+              <li>20 次/天的额度不适合频繁对话</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="p-block">
+        <div class="b-label">如何使用</div>
+        <ol class="steps">
+          <li>打开 <code>cloud.sambanova.ai</code> 注册（无需绑卡）</li>
+          <li>在控制台生成 API key</li>
+          <li>接口地址 <code>https://api.sambanova.ai/v1</code>，OpenAI 兼容</li>
+          <li>模型名用 <code>Meta-Llama-3.3-70B-Instruct</code>；调用后看响应头的限速字段掌握余量</li>
+        </ol>
+        <div class="how-chips">
+          <code><em>注册入口</em>cloud.sambanova.ai</code>
+          <code><em>接口地址</em>api.sambanova.ai/v1</code>
+          <code><em>示例模型</em>Meta-Llama-3.3-70B-Instruct</code>
+        </div>
+      </div>
+      <div class="p-block">
+        <div class="b-label">推荐人群与理由</div>
+        <ul class="who-list">
+          <li><b>想试用开源模型的人</b><span class="why">——可用低频额度比较 Llama、DeepSeek 和 gpt-oss 的输出</span></li>
+          <li><b>长文档分析等低频大任务</b><span class="why">——20 次/天每次可用约 1 万 token，正好匹配「量少但单次重」的工作方式</span></li>
+          <li><b>给 Groq 找一个互补的备用</b><span class="why">——同为加速平台，模型阵容和额度结构不同，可以互相补位</span></li>
+        </ul>
+      </div>
+      <div class="cn-note"><b>中文用户提示：</b>大陆直连情况以实测为准。注册不需要信用卡，适合当作低频任务专用通道。</div>
+    </article>
+
+    <article class="pcard" id="cerebras" data-num="04">
+      <div class="p-head">
+        <h3>Cerebras<span class="en">Cerebras Inference</span></h3>
+        <span class="p-role">推理加速平台 · 限速型</span>
+      </div>
+      <p class="p-pos"><b>是什么：</b>用晶圆级芯片（wafer-scale）做推理的公司，速度在免费层里是第一档——每秒数千 token，长文输出几乎瞬间完成。免费额度按 <b>token 总量</b>给：约 100 万 token/天，是九家里给得最多的。</p>
+      <div class="p-block">
+        <div class="b-label">免费额度</div>
+        <div class="quota-chips">
+          <code class="hl">约 1,000,000 token/天</code>
+          <code>免费试用等级，当前额度以控制台为准</code>
+          <code>gpt-oss-120b 免费试用：5 次/分钟；其他模型见控制台</code>
+          <code>官方当前示例：gpt-oss-120b、qwen-3.8-27b</code>
+        </div>
+      </div>
+      <div class="p-block">
+        <div class="b-label">优缺点</div>
+        <div class="proscons">
+          <div class="pc-box pros">
+            <h4>优点</h4>
+            <ul>
+              <li>速度第一档：晶圆级芯片，每秒数千 token，长文本输出最快</li>
+              <li>100 万 token/天是九家里最高的 token 额度，批量文本处理管够</li>
+              <li>131K 上下文，适合长文档</li>
+              <li>无需信用卡，OpenAI 兼容</li>
+            </ul>
+          </div>
+          <div class="pc-box cons">
+            <h4>缺点</h4>
+            <ul>
+              <li>限额按模型与账号等级变化，应以控制台为准</li>
+              <li>免费模型阵容变动快，旧教程中的模型可能已不可用</li>
+              <li>token 不结转，用不完的部分次日清零</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="p-block">
+        <div class="b-label">如何使用</div>
+        <ol class="steps">
+          <li>打开 <code>cloud.cerebras.ai</code> 注册（无需绑卡）</li>
+          <li>在控制台生成 API key</li>
+          <li>接口地址 <code>https://api.cerebras.ai/v1</code>，OpenAI 兼容</li>
+          <li>选模型前先看官方当前免费名单——阵容几个月就会变一次</li>
+        </ol>
+        <div class="how-chips">
+          <code><em>注册入口</em>cloud.cerebras.ai</code>
+          <code><em>接口地址</em>api.cerebras.ai/v1</code>
+          <code><em>示例模型</em>gpt-oss-120b / qwen-3.8-27b</code>
+        </div>
+      </div>
+      <div class="p-block">
+        <div class="b-label">推荐人群与理由</div>
+        <ul class="who-list">
+          <li><b>长文档处理、批量文本任务的人</b><span class="why">——100 万 token/天的总量能跑真正的批处理，其他家的免费层撑不起这个量</span></li>
+          <li><b>对响应速度敏感的体验向应用</b><span class="why">——每秒数千 token 的输出速度，长回复几乎不用等</span></li>
+        </ul>
+      </div>
+      <div class="cn-note"><b>中文用户提示：</b>大陆直连情况以实测为准。用它之前先查官方免费模型名单，别照着老教程写 Llama 模型名。</div>
+    </article>
+
+    <article class="pcard" id="openrouter" data-num="05">
+      <div class="p-head">
+        <h3>OpenRouter<span class="en">Model Gateway</span></h3>
+        <span class="p-role">聚合平台 · 限速型 + 池化型</span>
+      </div>
+      <p class="p-pos"><b>是什么：</b>一个聚合 500+ 模型的统一网关，一次注册、一个 key 就能调用几乎所有主流模型的 API，其中 <b>20+ 个免费模型</b>（模型 ID 带 <code>:free</code> 后缀）轮换上架——免费池里有 Llama 3.3 70B、Qwen3 Coder、GPT-OSS、Nemotron 等。它解决的不是「免费用」，是「不确定用哪个」。</p>
+      <div class="p-block">
+        <div class="b-label">免费额度</div>
+        <div class="quota-chips">
+          <code class="hl">20 次/分钟</code>
+          <code class="hl">50 次/天</code>
+          <code>充值后的免费模型日限额请查看官方定价与账号面板</code>
+          <code>免费模型 $0/token，限制在请求次数</code>
+          <code>免费路由器 openrouter/free 自动挑可用模型</code>
+        </div>
+      </div>
+      <div class="p-block">
+        <div class="b-label">优缺点</div>
+        <div class="proscons">
+          <div class="pc-box pros">
+            <h4>优点</h4>
+            <ul>
+              <li>一个 key 通吃 500+ 模型，横向对比的成本趋近于零</li>
+              <li>一个账号可比较多种免费模型，充值政策应以官方页面为准</li>
+              <li>免费路由器 <code>openrouter/free</code> 自动容错，A 模型挂了自动切 B</li>
+              <li>防锁定：换模型只改一个参数，不依赖任何一家厂商</li>
+            </ul>
+          </div>
+          <div class="pc-box cons">
+            <h4>缺点</h4>
+            <ul>
+              <li>免费模型的上游数据政策可能不同；OpenRouter 的内容日志设置需单独核对</li>
+              <li>失败请求也计入每日额度，重试循环会烧光 50 次/天</li>
+              <li>免费端点上下文窗口可能比付费版小；高峰期上游限流</li>
+              <li>官方自己都说免费模型不适合生产</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="p-block">
+        <div class="b-label">如何使用</div>
+        <ol class="steps">
+          <li>打开 <code>openrouter.ai</code>，用 Google 或 GitHub 账号登录</li>
+          <li>在「Keys」页生成 API key</li>
+          <li>接口地址 <code>https://openrouter.ai/api/v1</code>，模型名加 <code>:free</code> 后缀即走免费额度</li>
+          <li>在账号面板确认当前免费请求额度与隐私设置</li>
+        </ol>
+        <div class="how-chips">
+          <code><em>注册入口</em>openrouter.ai</code>
+          <code><em>接口地址</em>openrouter.ai/api/v1</code>
+          <code><em>示例模型</em>qwen/qwen3-coder:free</code>
+        </div>
+      </div>
+      <div class="p-block">
+        <div class="b-label">推荐人群与理由</div>
+        <ul class="who-list">
+          <li><b>付费前想横向对比模型的人</b><span class="why">——同一段提示词发给 20+ 个免费模型，跑一轮就知道谁适合你的任务，省下盲目订阅的钱</span></li>
+          <li><b>做模型评测 / 选型的团队</b><span class="why">——统一接口 + 统一计量，评测脚本写一次能复用所有模型</span></li>
+          <li><b>不想被任何一家厂商锁定的开发者</b><span class="why">——代码只依赖 OpenRouter 一个中间层，供应商随便换</span></li>
+        </ul>
+      </div>
+      <div class="cn-note"><b>中文用户提示：</b>中国境内的可达性以实测为准；免费模型与充值政策可能变化，使用前查看官方定价和账号面板。</div>
+    </article>
+
+    <article class="pcard" id="puter" data-num="06">
+      <div class="p-head">
+        <h3>Puter<span class="en">Puter.js · Internet OS</span></h3>
+        <span class="p-role">聚合平台 · 用户分摊型</span>
+      </div>
+      <p class="p-pos"><b>是什么：</b>一个开源的「互联网操作系统」（puter.com），附带的 <b>Puter.js</b> 让网页应用几行代码接入 AI——覆盖 400+ 模型、70+ 供应商（OpenAI、Anthropic、Gemini、Qwen、Nemotron 及图像、视频、语音模型）。它的免费逻辑和别家不同：<b>开发者零成本接入，AI 费用记在最终用户自己的 Puter 账号上</b>。</p>
+      <div class="p-block">
+        <div class="b-label">免费额度</div>
+        <div class="quota-chips">
+          <code class="hl">开发者侧：免费接入，无账单</code>
+          <code>用户侧：新账号送起始额度</code>
+          <code>账号用量限制以官方账户面板为准</code>
+          <code>400+ 模型，也可走 OpenRouter 的 :free 池</code>
+        </div>
+      </div>
+      <div class="p-block">
+        <div class="b-label">优缺点</div>
+        <div class="proscons">
+          <div class="pc-box pros">
+            <h4>优点</h4>
+            <ul>
+              <li>零后端、零 key：前端几行代码接入，开发者不用管账单</li>
+              <li>模型覆盖 400+，是本文最全的</li>
+              <li>用户分摊模式天然适合「AI 功能免费给用户用」的产品</li>
+              <li>开源，可以自托管</li>
+            </ul>
+          </div>
+          <div class="pc-box cons">
+            <h4>缺点</h4>
+            <ul>
+              <li>用户侧费用和用量限制需要在各自账户里确认</li>
+              <li>Node.js 使用需要额外的身份验证流程，不能按普通 OpenAI API 配置</li>
+              <li>不是完整 API 面：没有 Responses API、结构化输出等能力</li>
+              <li>每个终端用户都要注册 Puter 账号，门槛转嫁给了用户</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="p-block">
+        <div class="b-label">如何使用</div>
+        <ol class="steps">
+          <li>打开 <code>puter.com</code> 阅读开发者文档，在网页里引入 Puter.js</li>
+          <li>调用 <code>puter.ai.chat()</code>，指定模型名即可发起对话</li>
+          <li>你的用户登录自己的 Puter 账号使用——AI 费用从他们的账号扣</li>
+          <li>Node.js 场景请按照官方文档配置 Puter 身份验证</li>
+        </ol>
+        <div class="how-chips">
+          <code><em>注册入口</em>puter.com</code>
+          <code><em>接入方式</em>前端引入 Puter.js</code>
+          <code><em>调用方法</em>puter.ai.chat()</code>
+        </div>
+      </div>
+      <div class="p-block">
+        <div class="b-label">推荐人群与理由</div>
+        <ul class="who-list">
+          <li><b>做网页应用 / Demo 的前端开发者</b><span class="why">——不用搭后端、不用管 key 和账单，用户的 AI 用量用户自己付</span></li>
+          <li><b>想在一个入口接入所有模型的团队</b><span class="why">——400+ 模型覆盖最全，换模型改一行代码</span></li>
+        </ul>
+      </div>
+      <div class="cn-note"><b>中文用户提示：</b>大陆访问情况以实测为准；面向中国用户的产品，要先确认用户注册 Puter 账号的流程是否顺畅，再决定是否采用这种分摊模式。</div>
+    </article>
+
+    <article class="pcard local" id="lmstudio" data-num="07">
+      <div class="p-head">
+        <h3>LM Studio<span class="en">Local LLM Desktop</span></h3>
+        <span class="p-role">本地部署 · 无限额</span>
+      </div>
+      <p class="p-pos"><b>是什么：</b>本地桌面应用（Mac / Windows / Linux），从模型库下载开源模型（Llama、Qwen、DeepSeek 等）在<b>你自己的电脑上</b>运行，内置 OpenAI 兼容服务器 <code>http://localhost:1234/v1</code>。它不是 API 平台——模型和算力都是你自己的，因此<b>没有限额、没有账号、数据不出本机</b>。</p>
+      <div class="p-block">
+        <div class="b-label">免费额度</div>
+        <div class="quota-chips">
+          <code class="hl">无任何限额：不限次数、不限 token、离线可用</code>
+          <code>实际能力取决于本地硬件（内存 / 显卡）</code>
+          <code>软件免费开源，模型免费下载</code>
+        </div>
+      </div>
+      <div class="p-block">
+        <div class="b-label">优缺点</div>
+        <div class="proscons">
+          <div class="pc-box pros">
+            <h4>优点</h4>
+            <ul>
+              <li>完全免费无限额，自动化测试、Agent 调试随便跑</li>
+              <li>数据不出本机，隐私最好，内网环境也能用</li>
+              <li>离线可用，不依赖任何服务</li>
+              <li>兼容面最广：OpenAI 格式、Responses、Anthropic Messages 都支持，Claude Code 等工具可直接接本地模型</li>
+            </ul>
+          </div>
+          <div class="pc-box cons">
+            <h4>缺点</h4>
+            <ul>
+              <li>需要自己的硬件：推荐 16GB 内存起步，跑大模型要有 GPU 或大显存</li>
+              <li>本地推理速度取决于硬件，一般比云端慢</li>
+              <li>模型能力受限于你能跑动的开源模型（可用量化版压缩体积）</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="p-block">
+        <div class="b-label">如何使用</div>
+        <ol class="steps">
+          <li>打开 <code>lmstudio.ai</code> 下载安装（Mac / Windows / Linux）</li>
+          <li>在应用内搜索并下载模型（GGUF 格式，可选 Q4 等量化版）</li>
+          <li>在 Developer 页开启本地服务器，默认 <code>http://localhost:1234/v1</code></li>
+          <li>代码里 <code>base_url</code> 填本地地址，key 随便填，模型名填已加载的模型</li>
+        </ol>
+        <div class="how-chips">
+          <code><em>下载入口</em>lmstudio.ai</code>
+          <code><em>接口地址</em>localhost:1234/v1</code>
+          <code><em>模型格式</em>GGUF（含量化版）</code>
+        </div>
+      </div>
+      <div class="p-block">
+        <div class="b-label">推荐人群与理由</div>
+        <ul class="who-list">
+          <li><b>数据敏感 / 内网环境的开发者</b><span class="why">——数据不出本机是硬需求时，本地部署是唯一选择</span></li>
+          <li><b>想无限量跑量的人（自动化测试、Agent 调试）</b><span class="why">——没有限额概念，跑多少遍都不花钱</span></li>
+          <li><b>经常没有网络环境的场景</b><span class="why">——离线可用，飞机上、机房断网都能干活</span></li>
+        </ul>
+      </div>
+      <div class="cn-note"><b>中文用户提示：</b>运行不需要网络；下载模型时可走 Hugging Face 镜像站加速。想用 Claude Code 等工具接本地模型，把 <code>ANTHROPIC_BASE_URL</code> 指到 <code>http://localhost:1234</code> 即可。</div>
+    </article>
+
+    <article class="pcard cn" id="zhipu" data-num="CN-1">
+      <div class="p-head">
+        <h3>智谱 BigModel<span class="en">GLM</span></h3>
+        <span class="p-role">官方平台（中国）· 免费模型与试用额度</span>
+      </div>
+      <p class="p-pos"><b>是什么：</b>智谱的 GLM 系列模型 API 平台，适合中国境内开发者试用。免费模型名单、并发限制及新用户赠额可能变化，请在官方定价页和账户面板核对。若之后考虑付费网关，应逐项比较实际模型价格、接口能力与账单。</p>
+      <div class="p-block">
+        <div class="b-label">免费额度</div>
+        <div class="quota-chips">
+          <code class="hl">GLM 免费模型：以当前定价页为准</code>
+          <code>其他 Flash 模型是否免费，以账户面板为准</code>
+          <code>并发与频率限制以当前账户面板为准</code>
+          <code>新用户另有赠送 token（数量与有效期以官方条款为准）</code>
+        </div>
+      </div>
+      <div class="p-block">
+        <div class="b-label">优缺点</div>
+        <div class="proscons">
+          <div class="pc-box pros">
+            <h4>优点</h4>
+            <ul>
+              <li>可先从官方当前免费模型开始试用</li>
+              <li>零门槛：手机号注册即用，无卡、无网络环境要求</li>
+              <li>提供 OpenAI 兼容调用方式；上下文长度依具体模型而定</li>
+              <li>中国境内直连，延迟与稳定性对大陆用户最优</li>
+            </ul>
+          </div>
+          <div class="pc-box cons">
+            <h4>缺点</h4>
+            <ul>
+              <li>免费的是 Flash 级模型，能力上限低于国际免费池里的旗舰开源模型</li>
+              <li>「注册赠送千万级 token」的宣传口径在各来源间有出入（500 万 / 2,000 万 / 按月消耗说），别按赠额规划长期项目</li>
+              <li>并发限制的口径也不统一，跑量前先在控制台确认</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="p-block">
+        <div class="b-label">如何使用</div>
+        <ol class="steps">
+          <li>打开 <code>open.bigmodel.cn</code>，手机号注册</li>
+          <li>在控制台生成 API key，赠送额度自动到账</li>
+          <li>OpenAI 兼容地址 <code>https://open.bigmodel.cn/api/paas/v4/</code>，模型名 <code>glm-4-flash</code></li>
+        </ol>
+        <div class="how-chips">
+          <code><em>注册入口</em>open.bigmodel.cn</code>
+          <code><em>接口地址</em>open.bigmodel.cn/api/paas/v4/</code>
+          <code><em>示例模型</em>glm-4-flash</code>
+        </div>
+      </div>
+      <div class="p-block">
+        <div class="b-label">推荐人群与理由</div>
+        <ul class="who-list">
+          <li><b>中国学习者、学生的第一个 API</b><span class="why">——零门槛零成本，不用解决网络问题，注册到跑通第一个请求十分钟</span></li>
+          <li><b>Agent 工作流、代码辅助的原型测试</b><span class="why">——先用官方当前免费模型验证流程，再检查模型能力与并发限制</span></li>
+          <li><b>不想折腾网络环境的中国开发者</b><span class="why">——直连稳定，是国际平台之外最省心的替代</span></li>
+        </ul>
+      </div>
+      <div class="cn-note"><b>提示：</b>Flash 能力有限——需要更强模型时，用它跑通流程，再用百炼的新用户额度测 Qwen / DeepSeek 等旗舰。</div>
+    </article>
+
+    <article class="pcard cn" id="bailian" data-num="CN-2">
+      <div class="p-head">
+        <h3>阿里百炼<span class="en">Model Studio</span></h3>
+        <span class="p-role">官方平台（中国）· 储值型（试用金）</span>
+      </div>
+      <p class="p-pos"><b>是什么：</b>阿里云的大模型服务平台，可试用 Qwen 和部分第三方模型。合资格新用户通常按模型分别获得免费 token 额度，90 天内有效，实际模型与额度以控制台为准。额度到期或耗尽后，已认证账户可能转为按量付费；不想付费时应启用「免费额度用完即停」。</p>
+      <div class="p-block">
+        <div class="b-label">免费额度</div>
+        <div class="quota-chips">
+          <code class="hl">合资格模型通常各有 100 万 token</code>
+          <code class="hl">总额度取决于当前合资格模型名单</code>
+          <code>有效期 90 天，过期不补</code>
+          <code>仅华北 2（北京）地域、仅抵扣实时推理</code>
+        </div>
+      </div>
+      <div class="p-block">
+        <div class="b-label">优缺点</div>
+        <div class="proscons">
+          <div class="pc-box pros">
+            <h4>优点</h4>
+            <ul>
+              <li>覆盖多种模型，适合在有效期内做横向比较</li>
+              <li>各模型额度独立，适合分别做小规模验证</li>
+              <li>中国境内直连、阿里云生态成熟，企业后续付费迁移顺滑</li>
+            </ul>
+          </div>
+          <div class="pc-box cons">
+            <h4>缺点</h4>
+            <ul>
+              <li>90 天过期是硬约束：适合「集中试用 + 短期项目」，不适合长期使用</li>
+              <li>需要阿里云账号；是否认证会影响额度用尽后的计费行为</li>
+              <li>不同模型额度互不相通；同一实名主体重复注册无法再领</li>
+              <li>额度耗尽后默认自动转按量付费——务必开启「免费额度用完即停」</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="p-block">
+        <div class="b-label">如何使用</div>
+        <ol class="steps">
+          <li>注册阿里云账号，先确认免费额度与认证状态</li>
+          <li>打开 <code>bailian.console.aliyun.com</code> 开通百炼模型服务——免费额度自动发放，无需手动领取</li>
+          <li>在「模型广场」查看各模型的剩余额度与到期时间，创建 API-KEY</li>
+          <li>用 OpenAI 兼容地址 <code>https://dashscope.aliyuncs.com/compatible-mode/v1</code> 接入</li>
+          <li>在设置里开启「免费额度用完即停」，防止自动扣费</li>
+        </ol>
+        <div class="how-chips">
+          <code><em>注册入口</em>bailian.console.aliyun.com</code>
+          <code><em>接口地址</em>dashscope.aliyuncs.com/compatible-mode/v1</code>
+          <code><em>示例模型</em>qwen-max / deepseek-v3</code>
+        </div>
+      </div>
+      <div class="p-block">
+        <div class="b-label">推荐人群与理由</div>
+        <ul class="who-list">
+          <li><b>想一次试遍中国主流模型的人</b><span class="why">——Qwen、DeepSeek、Kimi、GLM 每模型 100 万 token，90 天内完成选型毫无压力</span></li>
+          <li><b>有明确 90 天内要做的项目 / 比赛的团队</b><span class="why">——试用金型额度的正确用法：集中火力短期消耗，而不是细水长流</span></li>
+          <li><b>需要 DeepSeek / Kimi 等第三方模型 API 的开发者</b><span class="why">——在百炼一个平台就能拿到多家模型的中国境内稳定接入</span></li>
+        </ul>
+      </div>
+      <div class="cn-note"><b>提示：</b>它是「储值型」免费的代表——用它的方式是一次性横向评测，而不是日常主力。长期使用前核对智谱和 Groq 的当前免费模型与限额。</div>
+    </article>
+  </section>
+
+  <!-- 03 人群速查 -->
+  <section class="sec" id="s3">
+    <div class="sec-head"><span class="sec-no">03</span><h2>人群速查表</h2><span class="en">Who Should Pick What</span></div>
+    <p class="sec-intro">别按功能挑，按「你是谁」挑。对号入座：</p>
+    <table class="dec-table">
+      <tr><th>你是谁</th><th>首选</th><th>备选</th><th>理由</th></tr>
+      <tr>
+        <td class="you">在校学生 / 学习者</td>
+        <td class="pick">智谱 GLM-4-Flash</td>
+        <td class="sub">百炼新用户额度</td>
+        <td class="why">中国境内接入方便；免费模型与额度请核对控制台</td>
+      </tr>
+      <tr>
+        <td class="you">独立开发者做 MVP</td>
+        <td class="pick">Groq</td>
+        <td class="sub">SambaNova</td>
+        <td class="why">快 + OpenAI 兼容，现有代码零改动；1,000 次/天够开发期用</td>
+      </tr>
+      <tr>
+        <td class="you">免费额度用尽、想低价续用</td>
+        <td class="pick">A2Agent</td>
+        <td class="sub">OpenRouter（$10 解锁）</td>
+        <td class="why">可作为免费额度用尽后的付费备选；具体试用活动、模型价格和兼容性以官网及账号配置为准</td>
+      </tr>
+      <tr>
+        <td class="you">模型选型 / 评测团队</td>
+        <td class="pick">OpenRouter（$10 解锁）</td>
+        <td class="sub">Puter</td>
+        <td class="why">一个 key 横向对比多个免费模型；充值后的额度以官方定价和账号面板为准</td>
+      </tr>
+      <tr>
+        <td class="you">长文档 / 批量文本处理</td>
+        <td class="pick">Cerebras</td>
+        <td class="sub">SambaNova</td>
+        <td class="why">约 100 万 token/天，长文本跑量管够；SambaNova 每次请求可用约 1 万 token</td>
+      </tr>
+      <tr>
+        <td class="you">网页应用，想让用户分摊 AI 成本</td>
+        <td class="pick">Puter</td>
+        <td class="sub">OpenRouter</td>
+        <td class="why">前端接入、开发者无账单，AI 费用由用户自己的账号承担</td>
+      </tr>
+      <tr>
+        <td class="you">想比较不同开源模型</td>
+        <td class="pick">SambaNova</td>
+        <td class="sub">Cerebras</td>
+        <td class="why">SambaNova 可低频测试 Llama、DeepSeek 和 gpt-oss，模型名单需实时确认</td>
+      </tr>
+      <tr>
+        <td class="you">数据敏感 / 离线 / 内网环境</td>
+        <td class="pick">LM Studio</td>
+        <td class="sub">—</td>
+        <td class="why">数据不出本机、无限额、离线可用；代价是自己的硬件</td>
+      </tr>
+      <tr>
+        <td class="you">想一次性试遍中国模型</td>
+        <td class="pick">阿里百炼</td>
+        <td class="sub">智谱</td>
+        <td class="why">70+ 模型每模型 100 万 token，90 天内横向评测完再决定付费谁</td>
+      </tr>
+    </table>
+  </section>
+
+  <!-- 04 生存手册 -->
+  <section class="sec" id="s4">
+    <div class="sec-head"><span class="sec-no">04</span><h2>免费额度生存手册</h2><span class="en">Living Within Free Limits</span></div>
+    <p class="sec-intro">免费层的限额数字都很小，用对这六招，50 次/天的额度也能撑起一个学习项目。</p>
+    <div class="tips">
+      <div class="tip">
+        <span class="t-no">TIP 01</span>
+        <h3>缓存重复答案</h3>
+        <p>同一个问题问十次 = 烧十次额度。把常见问答存到本地，先查缓存再调 API。这是省额度收益最高的一招。</p>
+      </div>
+      <div class="tip">
+        <span class="t-no">TIP 02</span>
+        <h3>提示词减肥</h3>
+        <p>限额不只算请求次数，也算 token（Groq 每天 20 万 token、Cerebras 约 100 万 token）。长上下文 + 长提示会悄悄烧光额度，裁剪到模型真正需要的内容。</p>
+      </div>
+      <div class="tip">
+        <span class="t-no">TIP 03</span>
+        <h3>批量合并</h3>
+        <p>每分钟的请求数上限很低（Groq 30、SambaNova 20）。把多个小任务合成一次调用，省的是最稀缺的 RPM。</p>
+      </div>
+      <div class="tip">
+        <span class="t-no">TIP 04</span>
+        <h3>大小模型分工</h3>
+        <p>简单活交给 Flash / 小模型，难题再上大的。免费池里的小模型往往限额相同但 token 消耗更低，等于变相扩容。</p>
+      </div>
+      <div class="tip">
+        <span class="t-no">TIP 05</span>
+        <h3>额度互备</h3>
+        <p>对支持 OpenAI 兼容接口的平台，可以复用客户端并切换 <code>base_url</code>、密钥与模型名；Puter 等平台需要各自的 SDK 或鉴权方式。做额度互备前先测试实际接口。</p>
+      </div>
+      <div class="tip">
+        <span class="t-no">TIP 06</span>
+        <h3>盯着面板</h3>
+        <p>失败请求也算额度（OpenRouter 明确如此）。上线前先在各家面板看一眼用量，别让一个重试循环把一天的额度烧光。</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="ending">
+    <h2>免费是入口，不是终点</h2>
+    <p>这九家中，限速型免费层适合学习和小工具；Puter 是用户承担费用，本地部署 LM Studio 则需要自己的硬件。尽量使用可迁移的接口设计，等流量起来后再比较付费方案；迁移时仍需核对模型能力、鉴权与计费。先免费起步，等产品值得付费时再付费。</p>
+  </section>
+
+  <footer>
+    <p><b>数据核实说明：</b>原稿额度核对于 2026-09-30；发布副本于 2026-10-08 对照官方文档修订了部分模型、限额和接入描述，完整引用见文末 References。各家免费模型池与限额随时调整，部分平台的限额按模型和账号等级变化，实际数字以各家控制台实时显示为准。本文不构成任何平台的服务承诺。</p>
+  </footer>
+
+  <section class="refs">
+    <h3>References<span class="en">· 参考来源</span></h3>
+    <ol>
+      <li><a href="https://a2agent.me/pricing" target="_blank" rel="noopener">A2Agent</a><span class="src"> — 官网</span><span class="for">（Detailed pricing comparison）</span></li>
+      <li><a href="https://klymentiev.com/blog/groq-pricing" target="_blank" rel="noopener">Groq Free Tier 2026: 1,000 Requests a Day, Llama Is Gone</a><span class="src"> — Klymentiev Blog</span><span class="for">（Groq 免费层限额）</span></li>
+      <li><a href="https://dev.to/build996/groqs-14400-requests-a-day-is-not-for-the-chat-models-1m12" target="_blank" rel="noopener">Groq's 14,400 requests a day is not for the chat models</a><span class="src"> — DEV Community</span><span class="for">（「14,400 次/天」旧数字的澄清）</span></li>
+      <li><a href="https://docs.sambanova.ai/docs/en/models/rate-limits" target="_blank" rel="noopener">Rate Limits Policy</a><span class="src"> — SambaNova 官方文档</span><span class="for">（SambaNova 免费层限速）</span></li>
+      <li><a href="https://inference-docs.cerebras.ai/support/rate-limits" target="_blank" rel="noopener">Cerebras Rate Limits</a><span class="src"> — Cerebras 官方文档</span><span class="for">（免费试用模型与限额）</span></li>
+      <li><a href="https://developer.puter.com/tutorials/free-unlimited-ai-api/" target="_blank" rel="noopener">Free, Unlimited AI API</a><span class="src"> — Puter 开发者文档</span><span class="for">（Puter 免费接入方式）</span></li>
+      <li><a href="https://lmstudio.ai/blog/claudecode" target="_blank" rel="noopener">Use your LM Studio Models in Claude Code</a><span class="src"> — LM Studio 官方博客</span><span class="for">（LM Studio 本地服务器与接口兼容性）</span></li>
+      <li><a href="https://openrouter.ai/pricing/" target="_blank" rel="noopener">OpenRouter Pricing</a><span class="src"> — OpenRouter 官方页面</span><span class="for">（免费模型与请求限额）</span></li>
+      <li><a href="https://www.appinn.com/google-increases-free-gemini-api-quota-1m-tokens/" target="_blank" rel="noopener">谷歌开始提高免费 Gemini API 配额，部分模型已达每分钟 100 万 Token</a><span class="src"> — 小众软件</span><span class="for">（Gemini 免费配额变动）</span></li>
+      <li><a href="https://benchlm.ai/free-tier" target="_blank" rel="noopener">Free LLM API Tiers: Limits by Provider, Verified</a><span class="src"> — BenchLM</span><span class="for">（各家免费层限额交叉核对）</span></li>
+      <li><a href="https://help.aliyun.com/zh/model-studio/new-free-quota" target="_blank" rel="noopener">百炼新人免费额度规则</a><span class="src"> — 阿里云官方文档</span><span class="for">（额度与有效期）</span></li>
+    </ol>
+
+    <div class="ofs">
+      <h4>OFFICIAL SITES · 平台官网入口</h4>
+      <ul>
+        <li><b>A2Agent</b><a href="https://a2agent.me/pricing" target="_blank" rel="noopener">a2agent.me/pricing</a></li>
+        <li><b>Google Gemini（AI Studio）</b><a href="https://ai.google.dev" target="_blank" rel="noopener">ai.google.dev</a></li>
+        <li><b>Groq</b><a href="https://console.groq.com" target="_blank" rel="noopener">console.groq.com</a></li>
+        <li><b>SambaNova Cloud</b><a href="https://cloud.sambanova.ai" target="_blank" rel="noopener">cloud.sambanova.ai</a></li>
+        <li><b>Cerebras</b><a href="https://cloud.cerebras.ai" target="_blank" rel="noopener">cloud.cerebras.ai</a></li>
+        <li><b>OpenRouter</b><a href="https://openrouter.ai" target="_blank" rel="noopener">openrouter.ai</a></li>
+        <li><b>Puter</b><a href="https://puter.com" target="_blank" rel="noopener">puter.com</a></li>
+        <li><b>LM Studio</b><a href="https://lmstudio.ai" target="_blank" rel="noopener">lmstudio.ai</a></li>
+        <li><b>智谱 BigModel</b><a href="https://open.bigmodel.cn" target="_blank" rel="noopener">open.bigmodel.cn</a></li>
+        <li><b>阿里百炼</b><a href="https://bailian.console.aliyun.com" target="_blank" rel="noopener">bailian.console.aliyun.com</a></li>
+      </ul>
+    </div>
+  </section>
+
+</main>
+
+<script>
+(function(){
+  var links = Array.prototype.slice.call(document.querySelectorAll('#topnav a'));
+  var secs = links.map(function(a){
+    return document.querySelector(a.getAttribute('href'));
+  }).filter(Boolean);
+  if(!('IntersectionObserver' in window)) return;
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){
+        links.forEach(function(l){l.classList.remove('on');});
+        var a = document.querySelector('#topnav a[href="#' + e.target.id + '"]');
+        if(a) a.classList.add('on');
+      }
+    });
+  }, {rootMargin:'-20% 0px -75% 0px'});
+  secs.forEach(function(s){obs.observe(s);});
+})();
+</script>
+</body>
+</html>

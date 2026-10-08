@@ -2,6 +2,8 @@
 
 An A2Agent-maintained comparison of ways to try large-model APIs at no initial cost. This table is a living companion to our 2026 field guide, not a promise of available quota. **Check the provider's linked page and your own console before building around a limit.**
 
+[Read the illustrated Chinese field guide](https://a2agent-ai.github.io/free-ai-api/).
+
 Last reviewed: **2026-10-08**. Quotas are tied to particular models, account tiers, regions, and usage policies; the details below can change without notice.
 
 | Platform | Free arrangement | Quota or trial highlight | Main catch | Official source |
