@@ -1,0 +1,36 @@
+name: Report a free API quota change
+description: Suggest a correction to a provider's free tier or trial quota.
+title: "Quota update: "
+labels: ["quota-update"]
+body:
+  - type: input
+    id: provider
+    attributes:
+      label: Provider and model
+      placeholder: "Example: Groq / openai/gpt-oss-120b"
+    validations:
+      required: true
+  - type: textarea
+    id: change
+    attributes:
+      label: What changed?
+      description: Include the previous and current limits or terms, and the account tier and region if relevant.
+    validations:
+      required: true
+  - type: input
+    id: source
+    attributes:
+      label: Official source URL
+      description: Link to the provider's documentation or pricing page when possible.
+    validations:
+      required: true
+  - type: input
+    id: checked
+    attributes:
+      label: Date checked
+      placeholder: YYYY-MM-DD
+    validations:
+      required: true
+  - type: markdown
+    attributes:
+      value: "Do not include API keys, account IDs, or personal information."
