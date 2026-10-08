@@ -6,8 +6,8 @@ body:
   - type: input
     id: provider
     attributes:
-      label: Provider and model
-      placeholder: "Example: Groq / openai/gpt-oss-120b"
+      label: Provider and API or model
+      placeholder: "Example: Tavily / Search API or Groq / openai/gpt-oss-120b"
     validations:
       required: true
   - type: textarea
