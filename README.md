@@ -4,7 +4,7 @@ An A2Agent-maintained directory of free AI APIs and related developer APIs. It b
 
 Read the field guides: [A2Agent blog article (English)](https://a2agent.me/blog/free-ai-api-guide-2026) · [Illustrated Chinese article](https://a2agent-ai.github.io/free-ai-api/).
 
-Last reviewed: **2026-10-08**. Quotas are tied to particular models, account tiers, regions, and usage policies; the details below can change without notice.
+Last updated: **2026-10-09**. Quotas are tied to particular models, account tiers, regions, and usage policies; the details below can change without notice.
 
 ## Text generation and model access
 
@@ -12,6 +12,9 @@ Last reviewed: **2026-10-08**. Quotas are tied to particular models, account tie
 |---|---|---|---|---|---|
 | [A2Agent](https://a2agent.me/) | Aggregator | $5 credit at signup; first $10 top-up earns another $10; model prices up to 50% off | Everyday calls, and cheap continued use after free quotas run out | Apart from new-user offers, promotions for existing users change from time to time | [Guide](https://a2agent.me/blog/free-ai-api-guide-2026) · [Pricing](https://a2agent.me/pricing) |
 | Google Gemini | Official developer platform | Free input and output tokens on eligible models; live limits vary by model and project | A first AI project and multimodal work | Free-tier content may be used to improve Google's products, subject to regional terms | [Pricing](https://ai.google.dev/gemini-api/docs/pricing) · [Limits](https://ai.google.dev/gemini-api/docs/rate-limits) |
+| Cloudflare Workers AI | Hosted inference | 10,000 free Neurons/day on the Workers Free plan | Experimenting with text and other AI models through a REST API | Neuron costs vary by model; some models require a paid billing method, and requests stop at the free daily limit | [Pricing](https://developers.cloudflare.com/workers-ai/platform/pricing/) · [REST API](https://developers.cloudflare.com/workers-ai/get-started/rest-api/) |
+| Cohere | Official developer platform | Free trial API key with up to 1,000 calls/month | Prototyping chat, embeddings and reranking | Trial keys have endpoint-specific rate limits and are intended for evaluation rather than production | [API keys and limits](https://docs.cohere.com/v2/docs/rate-limits) · [FAQ](https://docs.cohere.com/docs/cohere-faqs) |
+| Hugging Face Inference Providers | Aggregator | Free accounts receive $0.10 in inference credits/month, subject to change | Trying hosted open models through one API | The small allowance runs out quickly; further usage requires purchased credits | [Pricing](https://huggingface.co/docs/inference-providers/pricing) · [API overview](https://huggingface.co/docs/inference-providers/index) |
 | Groq | Fast inference | Example: `openai/gpt-oss-120b` has 30 requests/min, 1,000 requests/day and 200K tokens/day | Low-latency apps and existing OpenAI code | Limits differ by model; model availability changes | [Rate limits](https://console.groq.com/docs/rate-limits) |
 | SambaNova Cloud | Fast inference | Example: `Meta-Llama-3.3-70B-Instruct` has 20 requests/min, 20 requests/day and 200K tokens/day | Occasional large-model calls | Small daily request budget; check the current model list | [Rate limits](https://docs.sambanova.ai/docs/en/models/rate-limits) |
 | Cerebras Inference | Fast inference | Example: `gpt-oss-120b` has 5 requests/min and 1M tokens/day | Long documents and batch text jobs | Limits and available models vary; your console is authoritative | [Rate limits](https://inference-docs.cerebras.ai/support/rate-limits) |
