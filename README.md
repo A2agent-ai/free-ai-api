@@ -4,7 +4,7 @@ An A2Agent-maintained directory of free AI APIs and related developer APIs. It b
 
 Read the field guides: [A2Agent blog article (English)](https://a2agent.me/blog/free-ai-api-guide-2026) · [Illustrated Chinese article](https://a2agent-ai.github.io/free-ai-api/).
 
-Last updated: **2026-10-09**. Quotas are tied to particular models, account tiers, regions, and usage policies; the details below can change without notice.
+Last updated: **2026-10-10**. Quotas are tied to particular models, account tiers, regions, and usage policies; the details below can change without notice.
 
 ## Text generation and model access
 
@@ -33,6 +33,19 @@ These services expose APIs for search or gathering web content. Credits are not 
 | Tavily Search | Recurring free plan; API key; no credit card required | 1,000 API credits/month | Search, extract, and crawl consume different numbers of credits; calls stop when free credits run out | [Pricing](https://www.tavily.com/pricing) · [Search API](https://docs.tavily.com/documentation/api-reference/endpoint/search) |
 | Exa Search | Recurring free plan; API key; no payment method required | $20 signup credits plus $10 credits/month | Dollar credits are not a fixed number of searches; endpoint pricing varies | [Pricing](https://exa.ai/pricing) · [Search API](https://exa.ai/docs/reference/search) |
 | Firecrawl | Recurring free plan; API key; no credit card required | 1,000 credits/month | A basic scrape costs 1 credit/page; search and advanced features cost more | [Pricing](https://www.firecrawl.dev/pricing) · [API docs](https://docs.firecrawl.dev/) |
+
+## Embeddings and reranking
+
+| Platform | Free arrangement | Quota highlight | Main catch | Official source |
+|---|---|---|---|---|
+| Jina AI | New-user trial tokens; one API key for embeddings and reranking | Free-key limits: 100 requests/min and 100K tokens/min for each endpoint | Starter tokens are a one-time balance, not a monthly refill; check your key for the available amount | [Embedding API and limits](https://jina.ai/embeddings/) |
+
+## Speech to text
+
+| Platform | Free arrangement | Quota highlight | Main catch | Official source |
+|---|---|---|---|---|
+| Deepgram | One-time signup credit; no credit card required | $200 free credit with no expiration | Credit is spent at the chosen model's rate; continued usage after it runs out is paid | [Pricing](https://deepgram.com/pricing) · [API docs](https://developers.deepgram.com/docs/pre-recorded-audio) |
+| AssemblyAI | One-time free trial; credit card needed to upgrade | Up to $50 of audio processing on the free tier | Free-tier access covers transcription and speech understanding, but not LLM Gateway; upgrade after the balance is used | [Free-tier FAQ](https://support.assemblyai.com/articles/5370767329-can-i-sign-up-for-free) · [API docs](https://www.assemblyai.com/docs/) |
 
 ## Text to speech
 
